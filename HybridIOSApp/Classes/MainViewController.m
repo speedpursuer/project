@@ -79,7 +79,7 @@
     // Do any additional setup after loading the view from its nib.
     MyTableViewController *vc = [MyTableViewController new];
     [self.navigationController pushViewController:vc animated:YES];
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:NO]; 
 }
 
 - (void)viewDidUnload
