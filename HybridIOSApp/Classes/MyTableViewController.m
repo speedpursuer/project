@@ -7,6 +7,7 @@
 //
 
 #import "MyTableViewController.h"
+#import "YYImage.h"
 
 @interface MyTableViewController ()
 
@@ -64,6 +65,7 @@
         [self.navigationController setNavigationBarHidden:YES];
     }
     [super viewWillDisappear:animated];
+    //YYImage *image = [YYImage imageNamed:@"wall-e"];
 }
 
 
