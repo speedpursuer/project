@@ -12,6 +12,7 @@
 #import "YYImageExampleHelper.h"
 #import <sys/sysctl.h>
 #import "MBCircularProgressBarView.h"
+#import "MainViewController.h"
 
 
 @interface YYImageDisplayExample()<UIGestureRecognizerDelegate>
@@ -28,93 +29,23 @@
     
     _scrollView = [UIScrollView new];
     _scrollView.frame = self.view.bounds;
-    [self.view addSubview:_scrollView];
-	
-	//_progressBar = [[MBCircularProgressBarView alloc] init];
+    [self.view addSubview:_scrollView];	
     [self loadImageWithURL: self.clipURL];
 	
     _scrollView.panGestureRecognizer.cancelsTouchesInView = YES;
-}
-
-- (void)addImageWithName:(NSString *)name text:(NSString *)text {
-    YYImage *image = [YYImage imageNamed:name];
-    [self addImage:image size:CGSizeZero text:text];
 }
 
 - (void)loadImageWithURL:(NSString *)url {
 	[self loadImage: url];
 }
 
-
-- (void)addFrameImageWithText:(NSString *)text {
-    
-    NSString *basePath = [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"EmoticonWeibo.bundle/com.sina.default"];
-    NSMutableArray *paths = [NSMutableArray new];
-    [paths addObject:[basePath stringByAppendingPathComponent:@"d_aini@3x.png"]];
-    [paths addObject:[basePath stringByAppendingPathComponent:@"d_baibai@3x.png"]];
-    [paths addObject:[basePath stringByAppendingPathComponent:@"d_chanzui@3x.png"]];
-    [paths addObject:[basePath stringByAppendingPathComponent:@"d_chijing@3x.png"]];
-    [paths addObject:[basePath stringByAppendingPathComponent:@"d_dahaqi@3x.png"]];
-    [paths addObject:[basePath stringByAppendingPathComponent:@"d_guzhang@3x.png"]];
-    [paths addObject:[basePath stringByAppendingPathComponent:@"d_haha@2x.png"]];
-    [paths addObject:[basePath stringByAppendingPathComponent:@"d_haixiu@3x.png"]];
-    
-    UIImage *image = [[YYFrameImage alloc] initWithImagePaths:paths oneFrameDuration:0.1 loopCount:0];
-    [self addImage:image size:CGSizeZero text:text];
-}
-
-- (void)addSpriteSheetImageWithText:(NSString *)text {
-    NSString *path = [[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"ResourceTwitter.bundle/fav02l-sheet@2x.png"];
-    UIImage *sheet = [[UIImage alloc] initWithData:[NSData dataWithContentsOfFile:path] scale:2];
-    NSMutableArray *contentRects = [NSMutableArray new];
-    NSMutableArray *durations = [NSMutableArray new];
-    
-    
-    // 8 * 12 sprites in a single sheet image
-    CGSize size = CGSizeMake(sheet.size.width / 8, sheet.size.height / 12);
-    for (int j = 0; j < 12; j++) {
-        for (int i = 0; i < 8; i++) {
-            CGRect rect;
-            rect.size = size;
-            rect.origin.x = sheet.size.width / 8 * i;
-            rect.origin.y = sheet.size.height / 12 * j;
-            [contentRects addObject:[NSValue valueWithCGRect:rect]];
-            [durations addObject:@(1 / 60.0)];
-        }
-    }
-    YYSpriteSheetImage *sprite;
-    sprite = [[YYSpriteSheetImage alloc] initWithSpriteSheetImage:sheet
-                                                     contentRects:contentRects
-                                                   frameDurations:durations
-                                                        loopCount:0];
-    [self addImage:sprite size:size text:text];
-}
-
-- (void)addImage:(UIImage *)image size:(CGSize)size text:(NSString *)text {
-    YYAnimatedImageView *imageView = [[YYAnimatedImageView alloc] initWithImage:image];
-    
-    if (size.width > 0 && size.height > 0) imageView.size = size;
-    imageView.centerX = self.view.width / 2;
-    imageView.top = [(UIView *)[_scrollView.subviews lastObject] bottom] + 200;
-    [_scrollView addSubview:imageView];
-    [YYImageExampleHelper addTapControlToAnimatedImageView:imageView];
-    [YYImageExampleHelper addPanControlToAnimatedImageView:imageView];
-    for (UIGestureRecognizer *g in imageView.gestureRecognizers) {
-        g.delegate = self;
-    }
-    
-    UILabel *imageLabel = [UILabel new];
-    imageLabel.backgroundColor = [UIColor clearColor];
-    imageLabel.frame = CGRectMake(0, 0, self.view.width, 20);
-    imageLabel.top = imageView.bottom + 10;
-    imageLabel.textAlignment = NSTextAlignmentCenter;
-    imageLabel.text = text;
-    [_scrollView addSubview:imageLabel];
-    
-    _scrollView.contentSize = CGSizeMake(self.view.width, imageLabel.bottom + 20);
-}
-
 - (void)loadImage: (NSString *)url {
+	
+	//NSArray *controllers = [self.navigationController viewControllers];
+	//MainViewController* a =[controllers objectAtIndex:0];
+	//[a.webView stringByEvaluatingJavaScriptFromString:@"javaScriptCall();"];
+	//[((MainViewController *)[[self.navigationController viewControllers] objectAtIndex:0]).webView stringByEvaluatingJavaScriptFromString:@"javaScriptCall();"];
+
 	YYAnimatedImageView *imageView = [YYAnimatedImageView new];
 
 	/*
@@ -128,37 +59,35 @@
 	imageView.clipsToBounds = YES;
 	imageView.contentMode = UIViewContentModeScaleAspectFit;
 	imageView.backgroundColor = [UIColor whiteColor];
-
-	/*
-	LLARingSpinnerView *spinnerView = [[LLARingSpinnerView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
 	
-	// Optionally set the current progress
-	spinnerView.lineWidth = 1.5f;
+	//imageView.yy_imageURL = [NSURL URLWithString:url];
 	
-	// Optionally change the tint color
-	spinnerView.tintColor = [UIColor redColor];
-	 
-	// Add it as a subview
-
+	_progressBar = [[MBCircularProgressBarView alloc] initWithFrame:CGRectMake((imageView.width-100)/2, (imageView.height-100)/2, 100, 100)];
+	_progressBar.backgroundColor = [UIColor clearColor];
+	_progressBar.hidden = YES;
 	
-	[spinnerView startAnimating];
-	*/
-
-	
-	imageView.yy_imageURL = [NSURL URLWithString:url];
-	
-	
-//	[_circleProgressBar setProgress:(_circleProgressBar.progress + 0.06f) animated:YES];
+	[imageView yy_setImageWithURL:[NSURL URLWithString:url]
+		placeholder:nil
+		options:YYWebImageOptionProgressiveBlur | YYWebImageOptionShowNetworkActivity | YYWebImageOptionSetImageWithFadeAnimation
+		progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+			if (expectedSize > 0 && receivedSize > 0) {
+				CGFloat progress = (CGFloat)receivedSize / expectedSize;
+				progress = progress < 0 ? 0 : progress > 1 ? 1 : progress;				
+				if (_progressBar.hidden && progress != 1) _progressBar.hidden = NO;
+				[_progressBar setValue: progress * 100 animateWithDuration:1];
+			}
+		}
+		transform:nil
+		completion:^(UIImage *image, NSURL *url, YYWebImageFromType from, YYWebImageStage stage, NSError *error){
+			if (stage == YYWebImageStageFinished) {
+				[_progressBar setValue: 100 animateWithDuration:1];
+				_progressBar.hidden = YES;
+			}
+		}
+	];
 	
 	[_scrollView addSubview:imageView];
-	
-	_progressBar = [[MBCircularProgressBarView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
-	[_progressBar setValue:80.f
-	   animateWithDuration:1];
-	_progressBar.backgroundColor = [UIColor clearColor];
 	[_scrollView addSubview:_progressBar];
-	
-	
 	
 	[YYImageExampleHelper addTapControlToAnimatedImageView:imageView];
 	[YYImageExampleHelper addPanControlToAnimatedImageView:imageView];
@@ -171,16 +100,6 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
-}
-
-- (BOOL)isSimulator {
-    size_t size;
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    char *machine = malloc(size);
-    sysctlbyname("hw.machine", machine, &size, NULL, 0);
-    NSString *model = [NSString stringWithUTF8String:machine];
-    free(machine);
-    return [model isEqualToString:@"x86_64"] || [model isEqualToString:@"i386"];
 }
 
 -(void) viewWillDisappear:(BOOL)animated {

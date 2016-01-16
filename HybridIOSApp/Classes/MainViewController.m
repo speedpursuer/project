@@ -26,9 +26,7 @@
 //
 
 #import "MainViewController.h"
-#import "MyTableViewController.h"
-#import "YYImageDisplayExample.h"
-#import "YYWebImageExample.h"
+
 
 @implementation MainViewController
 
@@ -79,15 +77,9 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view from its nib.
-    //MyTableViewController *vc = [MyTableViewController new];
-    
-    //YYImageDisplayExample *vc = [YYImageDisplayExample new];
-    //YYWebImageExample *vc = [YYWebImageExample new];
-    //[self.navigationController pushViewController:vc animated:YES];
-    //[self.navigationController setNavigationBarHidden:NO];
-	
-	self.webView.scrollView.scrollEnabled = NO;
-	self.webView.scrollView.bounces = NO;
+	//self.webView.scrollView.scrollEnabled = NO;
+	//self.webView.scrollView.bounces = NO;
+	//[self.webView stringByEvaluatingJavaScriptFromString:@"alert();"];
 }
 
 - (void)viewDidUnload

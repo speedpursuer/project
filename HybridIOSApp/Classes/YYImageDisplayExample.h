@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CircleProgressBar.h"
 
 @interface YYImageDisplayExample : UIViewController
 @property (nonatomic, strong) NSString *clipURL;
-@property (weak, nonatomic) IBOutlet CircleProgressBar *circleProgressBar;
 @end

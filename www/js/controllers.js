@@ -27,18 +27,19 @@ angular.module('app.controllers', [])
  	}	
 })
    
-.controller('ClipsCtrl', function($scope, $state, $stateParams, FileCacheService, DBService, ErrorService) {
+.controller('ClipsCtrl', function($scope, $state, $stateParams, FileCacheService, DBService, ErrorService, AnimationService, clips) {
 	
 	//$scope.clips = DBService.getClipsByPlayer($stateParams.playerID).docs;
 	
+	/*
 	DBService.getClipsByPlayer($stateParams.playerID).then(function(result) {
     	$scope.clips = result.docs;
     	//$scope.clips = ClipService.groupClips(result.docs);
   	}).catch(function(err){
    		ErrorService.showAlert('Trouble in getting data');
-  	});
+  	});*/
 	
-	//$scope.clips = clips.docs;
+	$scope.clips = clips.docs;
 	
 	//$scope.clips = ClipService.groupClips(clips.docs);
 	
@@ -89,16 +90,21 @@ angular.module('app.controllers', [])
 		}
 		
 	};
+	
+	$scope.play = function(clipURL) {
+		AnimationService.playAnimation(clipURL);
+	};
 })
 
-.controller('PlayersCtrl', function($scope, $state, DBService) {
-	//$scope.players = players.docs;
+.controller('PlayersCtrl', function($scope, $state, DBService, players) {
+	$scope.players = players.docs;
 	
+	/*
 	DBService.getAllPlayers().then(function(results) {
 		$scope.players = results.docs;
 	}).catch(function (err) {              
 		ErrorService.showAlert('Trouble in getting data');		
-  	});
+  	});*/
 
   	$scope.doRefresh = function() {
   		DBService.syncRemote()
@@ -162,17 +168,18 @@ angular.module('app.controllers', [])
 	}
 })
 
-.controller('Tab2ClipsCtrl', function($scope, $state, $stateParams, FileCacheService, DBService, ErrorService, AnimationService) {
+.controller('Tab2ClipsCtrl', function($scope, $state, $stateParams, FileCacheService, DBService, ErrorService, AnimationService, clips) {
 	
-	//$scope.clips = clips.docs;	
+	$scope.clips = clips.docs;
 	//$scope.clips = ClipService.groupClips(clips.docs);
 	
+	/*
 	DBService.getClipsByPlayer($stateParams.playerID).then(function(result) {
     	$scope.clips = result.docs;
     	//$scope.clips = ClipService.groupClips(result.docs);
   	}).catch(function(err){
    		ErrorService.showAlert('Trouble in getting data');
-  	});
+  	});*/
 	
 	$scope.playerName = $stateParams.playerName;
 
@@ -225,6 +232,10 @@ angular.module('app.controllers', [])
 	$scope.play = function(clipURL) {
 		AnimationService.playAnimation(clipURL);
 	};
+	
+	$scope.test = function() {
+		alert("call from navtive app");
+	}
 })
 
 .controller('FavorateCtrl', function($scope, $state, ErrorService, DBService) {

@@ -154,12 +154,13 @@ var ImgCache = {
     // Returns a URL that can be used to locate a file
     Helpers.EntryGetURL = function (entry) {
         // toURL for html5, toURI for cordova 1.x
-        //return (typeof entry.toURL === 'function' ? Helpers.EntryToURL(entry) : entry.toURI()); by Lee
+        return (typeof entry.toURL === 'function' ? Helpers.EntryToURL(entry) : entry.toURI());        
+        /* by Lee
         if (Helpers.isCordova() && device.platform.toLowerCase() == "ios") {        
             return "/Documents" + entry.fullPath;
         } else {
             return (typeof entry.toURL === 'function' ? Helpers.EntryToURL(entry) : entry.toURI());
-        }
+        }*/
     };
 
     // Returns the full absolute path from the root to the FileEntry

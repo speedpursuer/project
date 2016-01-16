@@ -10,4 +10,15 @@ angular.element(document).ready(function () {
         console.log("Running in browser, bootstrapping AngularJS now.");        
         angular.bootstrap(document.body, ['app']);
     }
+	
+	/*
+	function javaScriptCall(){
+		var scope = angular.element(document.getElementById('idForJS')).scope();
+		scope.test();
+	}*/
 });
+
+function javaScriptCall(){
+	var scope = angular.element(document.getElementById('idForJS')).scope();
+	scope.test();
+}

@@ -39,14 +39,15 @@
 				</div>          
 			<a collection-repeat="item in clips" class="item item-thumbnail-left" ng-click='download(item._id, item.image, item.local, $index)'>
        -->
-       <div class="list">        	           	
+       <div class="list" id="idForJS">        	           	
        		<a collection-repeat="item in clips" class="item item-thumbnail-left" ng-click='play(item.image)'>
 	            <img img-cache-src ic-src="{{item.thumb}}">
 	            
 	           	<div class="row">
-	           		<div class="col col-top col-75"><h2>{{item.name}}</h2></div>
-	           		<div class="col col-top" ng-hide="item.local"><i class="ion-ios-cloud-download-outline larger"></i></div>
+	           		<div class="col col-top"><h2>{{item.name}}</h2></div>
 	           		<!--  
+					<div class="col col-top col-75"><h2>{{item.name}}</h2></div>
+					<div class="col col-top" ng-hide="item.local"><i class="ion-ios-cloud-download-outline larger"></i></div>
 	           		<div class="col col-top"><i ng-class="{'ion-play' : item.local, 'ion-ios-cloud-download-outline' : !item.local}" class="larger"></i></div>
 	           		-->
 	            </div>				

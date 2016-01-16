@@ -6,7 +6,7 @@ angular.module('app.services', [])
 
     //var dbName = "bboy", remoteURL = "http://admin:12341234@localhost:5984/";    
     var dbName = "bboy", remoteURL = "http://121.40.197.226:4984/";
-    var db = pouchdb.create(dbName), remoteDB = pouchdb.create(remoteURL + dbName);
+    var db = pouchdb.create(dbName, {adapter: 'websql'}), remoteDB = pouchdb.create(remoteURL + dbName);
             
     var list = [];	
 		  
