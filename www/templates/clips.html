@@ -37,9 +37,10 @@
 					<div class="col"><i ng-class="{'ion-play' : item.local, 'ion-ios-cloud-download-outline' : !item.local}"></i> </div>
 										
 				</div>          
+			<a collection-repeat="item in clips" class="item item-thumbnail-left" ng-click='download(item._id, item.image, item.local, $index)'>
        -->
        <div class="list">        	           	
-       		<a collection-repeat="item in clips" class="item item-thumbnail-left" ng-click='download(item._id, item.image, item.local, $index)'>        	
+       		<a collection-repeat="item in clips" class="item item-thumbnail-left" ng-click='play(item.image)'>
 	            <img img-cache-src ic-src="{{item.thumb}}">
 	            
 	           	<div class="row">

@@ -36,7 +36,8 @@
     _webImageView.contentMode = UIViewContentModeScaleAspectFill;
     _webImageView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:_webImageView];
-    
+	
+	
     _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     _indicator.center = CGPointMake(self.width / 2, self.height / 2);
     _indicator.hidden = YES;
@@ -70,6 +71,7 @@
         [_self setImageURL:_self.webImageView.yy_imageURL];
     }];
     [_label addGestureRecognizer:g];
+	
     
     return self;
 }
@@ -127,14 +129,16 @@
     UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithTitle:@"Reload" style:UIBarButtonItemStylePlain target:self action:@selector(reload)];
     self.navigationItem.rightBarButtonItem = button;
     self.view.backgroundColor = [UIColor colorWithWhite:0.217 alpha:1.000];
-    
+	
     NSArray *links = @[
         /*
          You can add your image url here.
          */
                                               
         @"http://i2.hoopchina.com.cn/blogfile/201203/10/133138138420385.gif",
-        @"http://i2.hoopchina.com.cn/blogfile/201203/10/133138171870238.gif",
+		
+		/*
+		@"http://i2.hoopchina.com.cn/blogfile/201203/10/133138171870238.gif",
         @"http://ww2.sinaimg.cn/large/e2828e10jw1ezohav2w2jg20960554qp.gif",
         @"http://print.dpnet.com.cn/webimages8/album/photos/5C57AC2D-3380-44D8-9186-81F0C126E9AC/c0f50094-ac0b-4d8c-9a91-3ca1f0587c62/634385095472031250_view.gif",
         
@@ -174,11 +178,12 @@
         // animated webp and apng: http://littlesvr.ca/apng/gif_apng_webp.html
         @"http://littlesvr.ca/apng/images/BladeRunner.png",
         @"http://littlesvr.ca/apng/images/Contact.webp",
+		*/
     ];
     
     _imageLinks = links;
     [self.tableView reloadData];
-    [self scrollViewDidScroll:self.tableView];
+    //[self scrollViewDidScroll:self.tableView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

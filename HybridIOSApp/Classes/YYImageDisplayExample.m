@@ -11,12 +11,15 @@
 #import "UIView+YYAdd.h"
 #import "YYImageExampleHelper.h"
 #import <sys/sysctl.h>
+#import "MBCircularProgressBarView.h"
+
 
 @interface YYImageDisplayExample()<UIGestureRecognizerDelegate>
-
+@property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) MBCircularProgressBarView *progressBar;
 @end
 @implementation YYImageDisplayExample {
-    UIScrollView *_scrollView;
+    UIScrollView *_scrollView;	
 }
 
 - (void)viewDidLoad {
@@ -26,28 +29,10 @@
     _scrollView = [UIScrollView new];
     _scrollView.frame = self.view.bounds;
     [self.view addSubview:_scrollView];
-    
-    UILabel *label = [UILabel new];
-    label.backgroundColor = [UIColor clearColor];
-    label.size = CGSizeMake(self.view.width, 60);
-    label.top = 20;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.numberOfLines = 0;
-    label.text = @"Tap the image to pause/play\n Slide on the image to forward/rewind";
-    
-    if ([self isSimulator]) {
-        label.text = [@"Please run this app in device\nto get better performance.\n\n" stringByAppendingString:label.text];
-        label.height = 120;
-    }
-    
-    //[_scrollView addSubview:label];
-    
-    [self addImageWithName:@"niconiconi" text:@"Animated GIF"];
-    //[self addImageWithName:@"wall-e" text:@"Animated WebP"];
-    //[self addImageWithName:@"pia" text:@"Animated PNG (APNG)"];
-    //[self addFrameImageWithText:@"Frame Animation"];
-    //[self addSpriteSheetImageWithText:@"Sprite Sheet Animation"];
-    
+	
+	//_progressBar = [[MBCircularProgressBarView alloc] init];
+    [self loadImageWithURL: self.clipURL];
+	
     _scrollView.panGestureRecognizer.cancelsTouchesInView = YES;
 }
 
@@ -55,6 +40,11 @@
     YYImage *image = [YYImage imageNamed:name];
     [self addImage:image size:CGSizeZero text:text];
 }
+
+- (void)loadImageWithURL:(NSString *)url {
+	[self loadImage: url];
+}
+
 
 - (void)addFrameImageWithText:(NSString *)text {
     
@@ -119,16 +109,69 @@
     imageLabel.top = imageView.bottom + 10;
     imageLabel.textAlignment = NSTextAlignmentCenter;
     imageLabel.text = text;
-    //[_scrollView addSubview:imageLabel];
+    [_scrollView addSubview:imageLabel];
     
     _scrollView.contentSize = CGSizeMake(self.view.width, imageLabel.bottom + 20);
+}
+
+- (void)loadImage: (NSString *)url {
+	YYAnimatedImageView *imageView = [YYAnimatedImageView new];
+
+	/*
+	NSLog(@"navigation bar height:%f, status bar height:%f", self.navigationController.navigationBar.frame.size.height, [UIApplication sharedApplication].statusBarFrame.size.height);
+	
+	NSLog(@"image view height:%f", self.view.size.height - self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height);
+	*/
+	
+	imageView.width = self.view.size.width;
+	imageView.height = self.view.size.height - self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
+	imageView.clipsToBounds = YES;
+	imageView.contentMode = UIViewContentModeScaleAspectFit;
+	imageView.backgroundColor = [UIColor whiteColor];
+
+	/*
+	LLARingSpinnerView *spinnerView = [[LLARingSpinnerView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
+	
+	// Optionally set the current progress
+	spinnerView.lineWidth = 1.5f;
+	
+	// Optionally change the tint color
+	spinnerView.tintColor = [UIColor redColor];
+	 
+	// Add it as a subview
+
+	
+	[spinnerView startAnimating];
+	*/
+
+	
+	imageView.yy_imageURL = [NSURL URLWithString:url];
+	
+	
+//	[_circleProgressBar setProgress:(_circleProgressBar.progress + 0.06f) animated:YES];
+	
+	[_scrollView addSubview:imageView];
+	
+	_progressBar = [[MBCircularProgressBarView alloc] initWithFrame:CGRectMake(0, 0, 200, 300)];
+	[_progressBar setValue:80.f
+	   animateWithDuration:1];
+	_progressBar.backgroundColor = [UIColor clearColor];
+	[_scrollView addSubview:_progressBar];
+	
+	
+	
+	[YYImageExampleHelper addTapControlToAnimatedImageView:imageView];
+	[YYImageExampleHelper addPanControlToAnimatedImageView:imageView];
+	for (UIGestureRecognizer *g in imageView.gestureRecognizers) {
+		g.delegate = self;
+	}
+	
+	//_scrollView.contentSize = CGSizeMake(self.view.width, 100);
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
 }
-
-
 
 - (BOOL)isSimulator {
     size_t size;

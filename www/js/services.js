@@ -556,11 +556,32 @@ angular.module('app.services', [])
     };
 
     return service;
-}) 
+})
+
+.factory('AnimationService', function() {
+	
+	var service = {}
+	
+	var win = function(d) {
+		console.log("Bookmark added!");
+						
+	};
+	var fail = function(e) {
+		console.log(e)
+	};
+	
+	service.playAnimation = function(clipURL) {
+		cordova.exec(win, fail, "MyHybridPlugin", "addBookmark", [clipURL]);
+	};
+	
+	return service;
+})
 
 .factory('ErrorService', function($rootScope, $ionicModal, $cordovaSplashscreen, $ionicPopup, $ionicLoading, $timeout) {
+				
+		 
     var service = {};
-
+				
     $ionicModal.fromTemplateUrl('templates/modal.html', {
         scope: $rootScope,
         animation: 'slide-in-up',

@@ -82,9 +82,12 @@
     //MyTableViewController *vc = [MyTableViewController new];
     
     //YYImageDisplayExample *vc = [YYImageDisplayExample new];
-    YYWebImageExample *vc = [YYWebImageExample new];
-    [self.navigationController pushViewController:vc animated:YES];
-    [self.navigationController setNavigationBarHidden:NO];
+    //YYWebImageExample *vc = [YYWebImageExample new];
+    //[self.navigationController pushViewController:vc animated:YES];
+    //[self.navigationController setNavigationBarHidden:NO];
+	
+	self.webView.scrollView.scrollEnabled = NO;
+	self.webView.scrollView.bounces = NO;
 }
 
 - (void)viewDidUnload

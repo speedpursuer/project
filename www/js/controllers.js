@@ -1,9 +1,9 @@
 angular.module('app.controllers', [])
 
-.controller('PlayerCtrl', function($scope, $ionicSlideBoxDelegate, DBService, ErrorService, players) {	
+.controller('PlayerCtrl', function($scope, $ionicSlideBoxDelegate, DBService, ErrorService, players) {
   	
 	(function() {
-		renderPlayList(players);		
+		renderPlayList(players);
 	}());
 	
   	$scope.doRefresh = function() {
@@ -21,9 +21,9 @@ angular.module('app.controllers', [])
 
  	function renderPlayList(results) {
  		$scope.players = results.docs;
-		$ionicSlideBoxDelegate.update();
-		$ionicSlideBoxDelegate.slide(0);
-		ErrorService.hideSplashScreen();		
+			$ionicSlideBoxDelegate.update();
+			$ionicSlideBoxDelegate.slide(0);
+			ErrorService.hideSplashScreen();
  	}	
 })
    
@@ -162,7 +162,7 @@ angular.module('app.controllers', [])
 	}
 })
 
-.controller('Tab2ClipsCtrl', function($scope, $state, $stateParams, FileCacheService, DBService, ErrorService) {
+.controller('Tab2ClipsCtrl', function($scope, $state, $stateParams, FileCacheService, DBService, ErrorService, AnimationService) {
 	
 	//$scope.clips = clips.docs;	
 	//$scope.clips = ClipService.groupClips(clips.docs);
@@ -220,6 +220,10 @@ angular.module('app.controllers', [])
 			$state.go("tabsController.tab2play", {fileURL: src, clipID: clipID});
 		}
 		
+	};
+	
+	$scope.play = function(clipURL) {
+		AnimationService.playAnimation(clipURL);
 	};
 })
 

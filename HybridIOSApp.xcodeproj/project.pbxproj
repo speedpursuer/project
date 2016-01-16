@@ -37,6 +37,9 @@
 		763B6CC21C4753F400752B77 /* CALayer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 763B6CC11C4753F400752B77 /* CALayer+YYAdd.m */; };
 		763D05D41C476F1C00120335 /* niconiconi@2x.gif_ in Resources */ = {isa = PBXBuildFile; fileRef = 763D05D31C476F1C00120335 /* niconiconi@2x.gif_ */; };
 		763D05D61C4771D300120335 /* niconiconi@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 763D05D51C4771D300120335 /* niconiconi@2x.gif */; };
+		764463D81C490BF700571245 /* MBCircularProgressBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463D51C490BF700571245 /* MBCircularProgressBarLayer.m */; };
+		764463D91C490BF700571245 /* MBCircularProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463D71C490BF700571245 /* MBCircularProgressBarView.m */; };
+		764463DC1C49159A00571245 /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463DB1C49159A00571245 /* CircleProgressBar.m */; };
 		7664582D1C4687D100DA581F /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664582C1C4687D100DA581F /* SQLitePlugin.m */; };
 		766458431C46884400DA581F /* YoikScreenOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 766458421C46884400DA581F /* YoikScreenOrientation.m */; };
 		766458461C46885000DA581F /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 766458451C46885000DA581F /* CDVFileTransfer.m */; };
@@ -138,6 +141,12 @@
 		763B6CC11C4753F400752B77 /* CALayer+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+YYAdd.m"; path = "../../app file/CALayer+YYAdd.m"; sourceTree = "<group>"; };
 		763D05D31C476F1C00120335 /* niconiconi@2x.gif_ */ = {isa = PBXFileReference; lastKnownFileType = file; name = "niconiconi@2x.gif_"; path = "../../../../app file/niconiconi@2x.gif_"; sourceTree = "<group>"; };
 		763D05D51C4771D300120335 /* niconiconi@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "niconiconi@2x.gif"; path = "../../../../app file/niconiconi@2x.gif"; sourceTree = "<group>"; };
+		764463D41C490BF700571245 /* MBCircularProgressBarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBCircularProgressBarLayer.h; path = "../../app file/MBCircularProgressBarLayer.h"; sourceTree = "<group>"; };
+		764463D51C490BF700571245 /* MBCircularProgressBarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarLayer.m; path = "../../app file/MBCircularProgressBarLayer.m"; sourceTree = "<group>"; };
+		764463D61C490BF700571245 /* MBCircularProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBCircularProgressBarView.h; path = "../../app file/MBCircularProgressBarView.h"; sourceTree = "<group>"; };
+		764463D71C490BF700571245 /* MBCircularProgressBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarView.m; path = "../../app file/MBCircularProgressBarView.m"; sourceTree = "<group>"; };
+		764463DA1C49159A00571245 /* CircleProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleProgressBar.h; path = "../../app file/CircleProgressBar.h"; sourceTree = "<group>"; };
+		764463DB1C49159A00571245 /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleProgressBar.m; path = "../../app file/CircleProgressBar.m"; sourceTree = "<group>"; };
 		7664582B1C4687D100DA581F /* SQLitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLitePlugin.h; path = com.phonegap.plugins.sqlite/SQLitePlugin.h; sourceTree = "<group>"; };
 		7664582C1C4687D100DA581F /* SQLitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLitePlugin.m; path = com.phonegap.plugins.sqlite/SQLitePlugin.m; sourceTree = "<group>"; };
 		766458411C46884400DA581F /* YoikScreenOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YoikScreenOrientation.h; path = "cordova-plugin-screen-orientation/YoikScreenOrientation.h"; sourceTree = "<group>"; };
@@ -404,6 +413,12 @@
 		763B6CB61C4752D800752B77 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				764463DA1C49159A00571245 /* CircleProgressBar.h */,
+				764463DB1C49159A00571245 /* CircleProgressBar.m */,
+				764463D41C490BF700571245 /* MBCircularProgressBarLayer.h */,
+				764463D51C490BF700571245 /* MBCircularProgressBarLayer.m */,
+				764463D61C490BF700571245 /* MBCircularProgressBarView.h */,
+				764463D71C490BF700571245 /* MBCircularProgressBarView.m */,
 				763B6CC01C4753F400752B77 /* CALayer+YYAdd.h */,
 				763B6CC11C4753F400752B77 /* CALayer+YYAdd.m */,
 				763B6CB71C47533900752B77 /* UIControl+YYAdd.h */,
@@ -595,12 +610,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				764463DC1C49159A00571245 /* CircleProgressBar.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				7664585D1C46888C00DA581F /* IonicKeyboard.m in Sources */,
 				766458611C4688A100DA581F /* CDVDevice.m in Sources */,
 				763B6CBD1C47533900752B77 /* UIControl+YYAdd.m in Sources */,
+				764463D81C490BF700571245 /* MBCircularProgressBarLayer.m in Sources */,
 				7664584F1C46885E00DA581F /* CDVLocalFilesystem.m in Sources */,
 				7664584E1C46885E00DA581F /* CDVFile.m in Sources */,
+				764463D91C490BF700571245 /* MBCircularProgressBarView.m in Sources */,
 				8090B3DD1B3CDAEB004F9219 /* MyTableViewController.m in Sources */,
 				7664584D1C46885E00DA581F /* CDVAssetLibraryFilesystem.m in Sources */,
 				766458551C46886F00DA581F /* CDVViewController+SplashScreen.m in Sources */,
@@ -640,6 +658,7 @@
 			baseConfigurationReference = 1D12C8D1B45FDE59A0C0412C /* Pods-HybridIOSApp.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -676,6 +695,7 @@
 			baseConfigurationReference = 40865E615FD7B622B71F30D2 /* Pods-HybridIOSApp.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -20,8 +20,10 @@
     [super viewDidLoad];
 //    YYImageExample *vc = [YYImageExample new];
 //    [self pushViewController:vc animated:NO];
+	
     MainViewController *vc = [MainViewController new];
-    [self pushViewController:vc animated:NO];
+	[self.interactivePopGestureRecognizer setEnabled:NO];
+    [self pushViewController:vc animated:NO];	
     [self setNavigationBarHidden:YES];
 }
 
