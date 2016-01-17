@@ -41,12 +41,11 @@ angular.module('app.routes', [])
 
     .state('tabsController.clips', {
       url: '/clips/:playerID, :playerName',
-      /*
       resolve: {
         clips: function($stateParams, DBService) {
           return DBService.getClipsByPlayer($stateParams.playerID);         
         }
-      },*/
+      },
       views: {
         'tab1': {
           controller: 'ClipsCtrl',
@@ -57,12 +56,11 @@ angular.module('app.routes', [])
 
     .state('tabsController.players', {
       url: '/players',
-      /*
       resolve: {
         players: function($stateParams, DBService) {
           return DBService.getAllPlayers();
         }
-      },*/
+      },
       views: {
         'tab2': {
           controller: 'PlayersCtrl',
@@ -72,13 +70,12 @@ angular.module('app.routes', [])
     }) 
 
     .state('tabsController.tab2Clips', {
-      url: '/clips/:playerID, :playerName',    
-      /*
+      url: '/clips/:playerID, :playerName',
       resolve: {
         clips: function($stateParams, DBService) {
           return DBService.getClipsByPlayer($stateParams.playerID);          
         }
-      },*/
+      },
       views: {
         'tab2': {
           controller: 'ClipsCtrl',

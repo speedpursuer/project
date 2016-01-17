@@ -27,21 +27,22 @@ angular.module('app.controllers', [])
  	}	
 })
    
-.controller('ClipsCtrl', function($scope, $state, $stateParams, $ionicListDelegate, FileCacheService, DBService, ErrorService, AnimationService, ClipService) {
+.controller('ClipsCtrl', function($scope, $state, $stateParams, $ionicListDelegate, FileCacheService, DBService, ErrorService, AnimationService, ClipService, clips) {
 	
-	var clipList = [];
+	var clipList = clips.docs;
 
 	$scope.listCanSwipe = true;	
-	//$scope.clips = clips.docs;	
+	$scope.clips = clipList;
 	$scope.playerName = $stateParams.playerName;
 	$scope.playingClipID = "";
 
+	/*
 	DBService.getClipsByPlayer($stateParams.playerID).then(function(result) {
     	clipList = result.docs;
     	$scope.clips = clipList;
   	}).catch(function(err){
    		ErrorService.showAlert('Trouble in getting data');
-  	});
+  	});*/
 
 	$scope.doRefresh = function() {
 		DBService.syncRemote()
@@ -96,14 +97,15 @@ angular.module('app.controllers', [])
 	};
 })
 
-.controller('PlayersCtrl', function($scope, $state, DBService) {
-	//$scope.players = players.docs;
-		
+.controller('PlayersCtrl', function($scope, $state, DBService, players) {
+	$scope.players = players.docs;
+	
+	/*
 	DBService.getAllPlayers().then(function(results) {
 		$scope.players = results.docs;
 	}).catch(function (err) {              
 		ErrorService.showAlert('Trouble in getting data');		
-  	});
+  	});*/
 
   	$scope.doRefresh = function() {
   		DBService.syncRemote()
