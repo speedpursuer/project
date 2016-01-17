@@ -5,77 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--Cordova-->
-        <scene sceneID="qcD-3z-Eya">
-            <objects>
-                <viewController title="Cordova" id="Lpz-Ak-Y9h" customClass="MainViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ilj-y4-dZe"/>
-                        <viewControllerLayoutGuide type="bottom" id="yvr-Ub-19V"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="psd-YZ-pH9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Cordova" image="icon-40.png" id="Ztz-fM-YiS"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Bh9-CH-fGq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1352" y="436"/>
-        </scene>
-        <!--Native -->
-        <scene sceneID="GxN-Gf-4lw">
-            <objects>
-                <viewController title="Native " id="f18-M3-8cV" customClass="MyTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" id="mmE-2u-rme">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell1" id="ICV-RJ-ggR">
-                                <rect key="frame" x="0.0" y="22" width="600" height="70"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ICV-RJ-ggR" id="46C-85-HtI">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAf-Mu-IWH">
-                                            <rect key="frame" x="23" y="24" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="history" id="Zzm-WX-8wZ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e4M-ER-KrA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1365" y="1082"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="q9b-7m-e0p">
-            <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8Te-dp-ZKe" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="zL4-zo-CHH">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="Lpz-Ak-Y9h" kind="relationship" relationship="viewControllers" id="t1W-gj-NDo"/>
-                        <segue destination="f18-M3-8cV" kind="relationship" relationship="viewControllers" id="1Kg-Ie-vMk"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I5O-0d-927" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="540" y="759"/>
-        </scene>
         <!--Root View Controller-->
         <scene sceneID="dkx-ro-JyJ">
             <objects>
@@ -94,34 +23,30 @@
             </objects>
         </scene>
         <!--Image Display Example-->
-        <scene sceneID="sx1-Es-aif">
+        <scene sceneID="CSm-bo-Nfk">
             <objects>
-                <viewController id="uEV-qr-sS1" customClass="YYImageDisplayExample" sceneMemberID="viewController">
+                <viewController id="t56-cx-7X5" customClass="YYImageDisplayExample" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="AeY-vk-D5C"/>
-                        <viewControllerLayoutGuide type="bottom" id="gl6-rl-uI2"/>
+                        <viewControllerLayoutGuide type="top" id="15y-VH-aNn"/>
+                        <viewControllerLayoutGuide type="bottom" id="HvO-Kr-pK6"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Qnc-0d-XWw">
+                    <view key="view" contentMode="scaleToFill" id="3q9-ig-vBH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c8G-Y0-LKS" customClass="CircleProgressBar">
-                                <rect key="frame" x="114" y="195" width="372" height="210"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ee5-tp-kbX">
+                                <rect key="frame" x="9" y="7" width="46" height="30"/>
+                                <state key="normal" title="Close"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="circleProgressBar" destination="c8G-Y0-LKS" id="nMu-wp-Jqb"/>
-                    </connections>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4hl-8u-j6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gny-01-yfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="989" y="-385"/>
+            <point key="canvasLocation" x="268" y="-471"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="icon-40.png" width="40" height="40"/>
-    </resources>
 </document>

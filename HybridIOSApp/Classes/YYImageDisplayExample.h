@@ -10,4 +10,6 @@
 
 @interface YYImageDisplayExample : UIViewController
 @property (nonatomic, strong) NSString *clipURL;
+@property (nonatomic, assign) id delegate;
+- (void) cancelAction;
 @end

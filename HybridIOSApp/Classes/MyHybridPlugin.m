@@ -10,7 +10,7 @@
 #import "YYImageDisplayExample.h"
 
 @implementation MyHybridPlugin
--(void)addBookmark:(CDVInvokedUrlCommand*) command {
+-(void)addBookmark_:(CDVInvokedUrlCommand*) command {
     NSString* bookmark = [command.arguments objectAtIndex:0];
     
     if(bookmark) {
@@ -38,5 +38,39 @@
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }
+}
+
+-(void)addBookmark:(CDVInvokedUrlCommand*) command {
+	NSString* bookmark = [command.arguments objectAtIndex:0];
+	
+	if(bookmark) {
+		
+		MainViewController* mvc = (MainViewController*)[self viewController];
+		
+		//YYImageDisplayExample *vc = [YYImageDisplayExample new];
+		
+		YYImageDisplayExample *vc = [[YYImageDisplayExample alloc] init];
+		
+		vc.clipURL = bookmark;
+		
+		//vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+		
+
+		
+		//vc.modalPresentationStyle = UIModalPresentationPageSheet;
+		vc.modalPresentationStyle = UIModalPresentationCurrentContext;
+		
+		vc.delegate = mvc;
+		
+		[mvc presentViewController:vc animated:YES completion:nil];
+		
+		//[mvc dismissViewControllerAnimated:YES completion:nil];
+		
+		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+	} else {
+		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+	}
 }
 @end

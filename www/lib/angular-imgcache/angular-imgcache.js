@@ -118,7 +118,7 @@ angular.module('ImgCache', [])
                         el.attr('src', dest);
                     }
                 });*/            	
-            	ImgCache.useCachedFileWithSource(el, src);            	
+            	ImgCache.useCachedFileWithSource(el, src);
             }
 
             var loadImg = function(type, el, src) {
@@ -132,15 +132,17 @@ angular.module('ImgCache', [])
                         if (success) {
                             setImg(type, el, src);
                         } else {
-                            ImgCache.cacheFile(src, function() {
-                                setImg(type, el, src);
-                            });
+							ImgCache.cacheFile(src, function() {
+								setImg(type, el, src);
+							}, function() {
+								el.attr('src', "images/gift.jpg");
+							});
                         }
 
                     });
                 });
             }
-            
+	
             attrs.$observe('icSrc', function(src) {
 
                 loadImg('src', el, src);

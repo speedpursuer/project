@@ -27,31 +27,29 @@ angular.module('app.controllers', [])
  	}	
 })
    
-.controller('ClipsCtrl', function($scope, $state, $stateParams, FileCacheService, DBService, ErrorService, AnimationService, clips) {
+.controller('ClipsCtrl', function($scope, $state, $stateParams, $ionicListDelegate, FileCacheService, DBService, ErrorService, AnimationService, ClipService) {
 	
-	//$scope.clips = DBService.getClipsByPlayer($stateParams.playerID).docs;
-	
-	/*
+	var clipList = [];
+
+	$scope.listCanSwipe = true;	
+	//$scope.clips = clips.docs;	
+	$scope.playerName = $stateParams.playerName;
+	$scope.playingClipID = "";
+
 	DBService.getClipsByPlayer($stateParams.playerID).then(function(result) {
-    	$scope.clips = result.docs;
-    	//$scope.clips = ClipService.groupClips(result.docs);
+    	clipList = result.docs;
+    	$scope.clips = clipList;
   	}).catch(function(err){
    		ErrorService.showAlert('Trouble in getting data');
-  	});*/
-	
-	$scope.clips = clips.docs;
-	
-	//$scope.clips = ClipService.groupClips(clips.docs);
-	
-	$scope.playerName = $stateParams.playerName;
+  	});
 
 	$scope.doRefresh = function() {
 		DBService.syncRemote()
 		.then(function(result) {
 			if(result.docs_written > 0) {
 				DBService.getClipsByPlayer($stateParams.playerID).then(function(result) {
-	            	$scope.clips = result.docs;
-	            	//$scope.clips = ClipService.groupClips(result.docs);
+	            	clipList = result.docs;
+    				$scope.clips = clipList;
 	          	}).catch(function(err){
 	           		ErrorService.showAlert('Trouble in getting data');
 	          	}).finally(function() {
@@ -66,45 +64,46 @@ angular.module('app.controllers', [])
   		});
 	};
 
-	$scope.download = function(clipID, src, local, index) {
-
-		if(!local) {	
-			ErrorService.showDownLoader();		
-			FileCacheService.download(src).then(function(dest) {
-				DBService.setLocalClip(clipID, dest).then(function() {
-					$scope.clips[index].local = true;
-					$scope.clips[index].image = dest;
-					ErrorService.hideLoader();
-					//$state.go("tabsController.play", {fileURL: src, clipID: clipID});
-				}).catch(function(err) {
-					console.log(err);
-					ErrorService.hideLoader('Download error');
-				});
-			}).catch(function(err) {
-				console.log(err);
-				ErrorService.hideLoader('Download error');
-			});
-		}else {
-			ErrorService.showLoader('Loading...');
-			$state.go("tabsController.play", {fileURL: src, clipID: clipID});
-		}
-		
+	$scope.play = function(clipURL, clipID) {
+		$scope.playingClipID = clipID;
+		AnimationService.playAnimation(clipURL);
 	};
 	
-	$scope.play = function(clipURL) {
-		AnimationService.playAnimation(clipURL);
+	$scope.setFavorite = function(clipID) {
+		//$scope.favorite = !$scope.favorite;
+		DBService.setFavorite(clipID, true);
+		DBService.addItem(clipID);
+		$ionicListDelegate.closeOptionButtons();
+		//$scope.shouldShowDelete = false;
+		/*
+		if($scope.favorite) {
+			DBService.addItem(clipID);
+		} else {
+			DBService.removeItem(clipID);
+		}*/
+	};
+
+	$scope.updateClipThumb = function() {		
+		if($scope.playingClipID != "") {
+			ClipService.updateClipThumb($scope.playingClipID);			
+			for(var i=0;i<clipList.length;i++) {
+            	if(clipList[i]._id == $scope.playingClipID) {                
+            		clipList[i].thumb = clipList[i].image + ".jpg";
+            		return;
+            	}
+        	}
+		}
 	};
 })
 
-.controller('PlayersCtrl', function($scope, $state, DBService, players) {
-	$scope.players = players.docs;
-	
-	/*
+.controller('PlayersCtrl', function($scope, $state, DBService) {
+	//$scope.players = players.docs;
+		
 	DBService.getAllPlayers().then(function(results) {
 		$scope.players = results.docs;
 	}).catch(function (err) {              
 		ErrorService.showAlert('Trouble in getting data');		
-  	});*/
+  	});
 
   	$scope.doRefresh = function() {
   		DBService.syncRemote()
@@ -131,55 +130,65 @@ angular.module('app.controllers', [])
 	};
 })
 
-.controller('PlayCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, ClipService, DBService, gif) {
+.controller('FavorateCtrl', function($scope, $state, ErrorService, DBService, AnimationService) {
+	
+	//$scope.clips = clips.docs;			
+	//$scope.clips = ClipService.groupClips(clips.docs);
+	
+	$scope.clips = DBService.getItems();
+	
+	$scope.download = function(clipID, src, local, index) {
 
-	ClipService.renderView(gif);	
-	getFavorite($stateParams.clipID);
-	$scope.gif = gif;
-	$scope.hideNavBar = false;
+		if(local) {	
+			ErrorService.showLoader('Loading...');
+			$state.go("tabsController.tab3play", {fileURL: src, clipID: clipID});
+		}else {
+			
+		}		
+	};
 	
-	$scope.fullScreen = function() {
-		$scope.hideNavBar = !$scope.hideNavBar;
-	};	
-	
-	$scope.setFavorite = function() {
-		$scope.favorite = !$scope.favorite;
-		DBService.setFavorite($stateParams.clipID, $scope.favorite);
-		if($scope.favorite) {
-			DBService.addItem($stateParams.clipID);
-		} else {
-			DBService.removeItem($stateParams.clipID);
+	$scope.doRefresh = function() {
+		DBService.getFavorite().then(function(clips){
+			$scope.clips = clips.docs;
+			$scope.$broadcast('scroll.refreshComplete');
+		}).catch(function() {
+			ErrorService.showAlert('Trouble in getting data');
+  			$scope.$broadcast('scroll.refreshComplete');
+		});
+	};
+
+	$scope.play = function(clipURL) {
+		AnimationService.playAnimation(clipURL);
+	};
+	/*
+	function groupClips(clips) {		
+		var i = clips.length, returnObj = {};		
+		while(i--) {
+			if(returnObj[clips[i].move]){
+	            returnObj[clips[i].move].push(clips[i]);
+	        }else{
+	            returnObj[clips[i].move] = [clips[i]];
+	        }
 		}
-	};
-	
-	$scope.goBack = function() {		
-		ClipService.stop($scope.gif);
-		$ionicHistory.goBack();
-	};
-	
-	function getFavorite(clipID) {
-		DBService.getDoc(clipID).then(function(result) {
-			if(result.favorite) {
-				$scope.favorite = result.favorite;
-			} else {
-				$scope.favorite = false;
-			}
-		})
-	}
+		return returnObj;			
+	}*/
 })
 
-.controller('Tab2ClipsCtrl', function($scope, $state, $stateParams, FileCacheService, DBService, ErrorService, AnimationService, clips) {
+/*
+.controller('Tab2ClipsCtrl', function($scope, $state, $stateParams, $ionicListDelegate, FileCacheService, DBService, ErrorService, AnimationService, clips) {
+	
+	$scope.listCanSwipe = true;
 	
 	$scope.clips = clips.docs;
 	//$scope.clips = ClipService.groupClips(clips.docs);
 	
-	/*
+	
 	DBService.getClipsByPlayer($stateParams.playerID).then(function(result) {
     	$scope.clips = result.docs;
     	//$scope.clips = ClipService.groupClips(result.docs);
   	}).catch(function(err){
    		ErrorService.showAlert('Trouble in getting data');
-  	});*/
+  	});
 	
 	$scope.playerName = $stateParams.playerName;
 
@@ -235,50 +244,156 @@ angular.module('app.controllers', [])
 	
 	$scope.test = function() {
 		alert("call from navtive app");
+	};
+	
+	$scope.setFavorite = function(clipID) {
+		//$scope.favorite = !$scope.favorite;
+		DBService.setFavorite(clipID, true);
+		DBService.addItem(clipID);
+		$ionicListDelegate.closeOptionButtons();
+		//$scope.shouldShowDelete = false;
+
+		if($scope.favorite) {
+			DBService.addItem(clipID);
+		} else {
+			DBService.removeItem(clipID);
+		}
+	};
+})
+
+.controller('PlayCtrl', function($scope, $rootScope, $stateParams, $ionicHistory, ClipService, DBService, gif) {
+
+	ClipService.renderView(gif);	
+	getFavorite($stateParams.clipID);
+	$scope.gif = gif;
+	$scope.hideNavBar = false;
+	
+	$scope.fullScreen = function() {
+		$scope.hideNavBar = !$scope.hideNavBar;
+	};	
+	
+	$scope.setFavorite = function() {
+		$scope.favorite = !$scope.favorite;
+		DBService.setFavorite($stateParams.clipID, $scope.favorite);
+		if($scope.favorite) {
+			DBService.addItem($stateParams.clipID);
+		} else {
+			DBService.removeItem($stateParams.clipID);
+		}
+	};
+	
+	$scope.goBack = function() {		
+		ClipService.stop($scope.gif);
+		$ionicHistory.goBack();
+	};
+	
+	function getFavorite(clipID) {
+		DBService.getDoc(clipID).then(function(result) {
+			if(result.favorite) {
+				$scope.favorite = result.favorite;
+			} else {
+				$scope.favorite = false;
+			}
+		})
 	}
 })
 
-.controller('FavorateCtrl', function($scope, $state, ErrorService, DBService) {
+
+.controller('ClipsCtrl', function($scope, $state, $stateParams, $ionicListDelegate, FileCacheService, DBService, ErrorService, AnimationService, clips, ClipService) {
 	
-	//$scope.clips = clips.docs;			
+	$scope.listCanSwipe = true;
+	
+	//$scope.clips = DBService.getClipsByPlayer($stateParams.playerID).docs;
+	
+
+	DBService.getClipsByPlayer($stateParams.playerID).then(function(result) {
+    	$scope.clips = result.docs;
+    	//$scope.clips = ClipService.groupClips(result.docs);
+  	}).catch(function(err){
+   		ErrorService.showAlert('Trouble in getting data');
+  	});
+	
+	$scope.clips = clips.docs;
+	
 	//$scope.clips = ClipService.groupClips(clips.docs);
 	
-	$scope.clips = DBService.getItems();
-	
+	$scope.playerName = $stateParams.playerName;
+
+	$scope.playingClipID = "";
+
+	$scope.doRefresh = function() {
+		DBService.syncRemote()
+		.then(function(result) {
+			if(result.docs_written > 0) {
+				DBService.getClipsByPlayer($stateParams.playerID).then(function(result) {
+	            	$scope.clips = result.docs;
+	            	//$scope.clips = ClipService.groupClips(result.docs);
+	          	}).catch(function(err){
+	           		ErrorService.showAlert('Trouble in getting data');
+	          	}).finally(function() {
+	          		$scope.$broadcast('scroll.refreshComplete');
+	          	});
+			} else {
+				$scope.$broadcast('scroll.refreshComplete');
+			}				
+		}).catch(function (err){
+  			ErrorService.showAlert('Trouble in getting data');
+  			$scope.$broadcast('scroll.refreshComplete');
+  		});
+	};
+
 	$scope.download = function(clipID, src, local, index) {
 
-		if(local) {	
-			ErrorService.showLoader('Loading...');
-			$state.go("tabsController.tab3play", {fileURL: src, clipID: clipID});
+		if(!local) {	
+			ErrorService.showDownLoader();		
+			FileCacheService.download(src).then(function(dest) {
+				DBService.setLocalClip(clipID, dest).then(function() {
+					$scope.clips[index].local = true;
+					$scope.clips[index].image = dest;
+					ErrorService.hideLoader();
+					//$state.go("tabsController.play", {fileURL: src, clipID: clipID});
+				}).catch(function(err) {
+					console.log(err);
+					ErrorService.hideLoader('Download error');
+				});
+			}).catch(function(err) {
+				console.log(err);
+				ErrorService.hideLoader('Download error');
+			});
 		}else {
-			
-		}		
+			ErrorService.showLoader('Loading...');
+			$state.go("tabsController.play", {fileURL: src, clipID: clipID});
+		}
+		
 	};
 	
-	$scope.doRefresh = function() {
-		DBService.getFavorite().then(function(clips){
-			$scope.clips = clips.docs;
-			$scope.$broadcast('scroll.refreshComplete');
-		}).catch(function() {
-			ErrorService.showAlert('Trouble in getting data');
-  			$scope.$broadcast('scroll.refreshComplete');
-		});
+	$scope.play = function(clipURL, clipID) {
+		$scope.playingClipID = clipID;
+		AnimationService.playAnimation(clipURL);
 	};
-	/*
-	function groupClips(clips) {		
-		var i = clips.length, returnObj = {};		
-		while(i--) {
-			if(returnObj[clips[i].move]){
-	            returnObj[clips[i].move].push(clips[i]);
-	        }else{
-	            returnObj[clips[i].move] = [clips[i]];
-	        }
+	
+	$scope.setFavorite = function(clipID) {
+		//$scope.favorite = !$scope.favorite;
+		DBService.setFavorite(clipID, true);
+		DBService.addItem(clipID);
+		$ionicListDelegate.closeOptionButtons();
+		//$scope.shouldShowDelete = false;
+		
+		if($scope.favorite) {
+			DBService.addItem(clipID);
+		} else {
+			DBService.removeItem(clipID);
 		}
-		return returnObj;			
-	}*/
-})
-   
-   
+	};
+
+	$scope.updateClipThumb = function() {
+		if($scope.playingClipID != "") {
+			ClipService.updateClipThumb($scope.playingClipID);
+		}
+	};
+})   
+
+*/   
 	/*
 	var gifiddle = new Gifiddle();
 

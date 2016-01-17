@@ -6696,7 +6696,7 @@ a.item:hover,a.item:focus {
 .item-complex .item-content,.item-radio .item-content {
 	position: relative;
 	z-index: 2;
-	padding: 16px 49px 16px 16px;
+/*	padding: 16px 49px 16px 16px;*/
 	border: none;
 	background-color: #fff;
 }

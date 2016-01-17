@@ -31,6 +31,7 @@
 		30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FC414816E50CA1004E6F35 /* icon-72@2x.png */; };
 		4A92D5B643054CE68555235F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC078829004BD0A338F3B2 /* libsqlite3.dylib */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
+		76059CD11C4B804B00EE3011 /* FRDLivelyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 76059CD01C4B804B00EE3011 /* FRDLivelyButton.m */; };
 		763B6CBD1C47533900752B77 /* UIControl+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 763B6CB81C47533900752B77 /* UIControl+YYAdd.m */; };
 		763B6CBE1C47533900752B77 /* UIGestureRecognizer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 763B6CBA1C47533900752B77 /* UIGestureRecognizer+YYAdd.m */; };
 		763B6CBF1C47533900752B77 /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 763B6CBC1C47533900752B77 /* UIView+YYAdd.m */; };
@@ -40,6 +41,8 @@
 		764463D81C490BF700571245 /* MBCircularProgressBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463D51C490BF700571245 /* MBCircularProgressBarLayer.m */; };
 		764463D91C490BF700571245 /* MBCircularProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463D71C490BF700571245 /* MBCircularProgressBarView.m */; };
 		764463DC1C49159A00571245 /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463DB1C49159A00571245 /* CircleProgressBar.m */; };
+		765331971C4B93B4008FFD00 /* SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 765331961C4B93B4008FFD00 /* SHA1.m */; };
+		7653319A1C4B9514008FFD00 /* MessageDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = 765331991C4B9514008FFD00 /* MessageDigest.m */; };
 		7664582D1C4687D100DA581F /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664582C1C4687D100DA581F /* SQLitePlugin.m */; };
 		766458431C46884400DA581F /* YoikScreenOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 766458421C46884400DA581F /* YoikScreenOrientation.m */; };
 		766458461C46885000DA581F /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 766458451C46885000DA581F /* CDVFileTransfer.m */; };
@@ -131,6 +134,8 @@
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		5ECC078829004BD0A338F3B2 /* libsqlite3.dylib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6E9B3373DC2144CA8A47E7F1 /* CDVLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVLogger.h; path = "cordova-plugin-console/CDVLogger.h"; sourceTree = "<group>"; };
+		76059CCF1C4B804B00EE3011 /* FRDLivelyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDLivelyButton.h; path = "../../app file/FRDLivelyButton.h"; sourceTree = "<group>"; };
+		76059CD01C4B804B00EE3011 /* FRDLivelyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDLivelyButton.m; path = "../../app file/FRDLivelyButton.m"; sourceTree = "<group>"; };
 		763B6CB71C47533900752B77 /* UIControl+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIControl+YYAdd.h"; path = "../../app file/UIControl+YYAdd.h"; sourceTree = "<group>"; };
 		763B6CB81C47533900752B77 /* UIControl+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIControl+YYAdd.m"; path = "../../app file/UIControl+YYAdd.m"; sourceTree = "<group>"; };
 		763B6CB91C47533900752B77 /* UIGestureRecognizer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIGestureRecognizer+YYAdd.h"; path = "../../app file/UIGestureRecognizer+YYAdd.h"; sourceTree = "<group>"; };
@@ -147,6 +152,10 @@
 		764463D71C490BF700571245 /* MBCircularProgressBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarView.m; path = "../../app file/MBCircularProgressBarView.m"; sourceTree = "<group>"; };
 		764463DA1C49159A00571245 /* CircleProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleProgressBar.h; path = "../../app file/CircleProgressBar.h"; sourceTree = "<group>"; };
 		764463DB1C49159A00571245 /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleProgressBar.m; path = "../../app file/CircleProgressBar.m"; sourceTree = "<group>"; };
+		765331951C4B93B4008FFD00 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHA1.h; path = "../../app file/SHA1.h"; sourceTree = "<group>"; };
+		765331961C4B93B4008FFD00 /* SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHA1.m; path = "../../app file/SHA1.m"; sourceTree = "<group>"; };
+		765331981C4B9514008FFD00 /* MessageDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageDigest.h; path = "../../app file/MessageDigest.h"; sourceTree = "<group>"; };
+		765331991C4B9514008FFD00 /* MessageDigest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageDigest.m; path = "../../app file/MessageDigest.m"; sourceTree = "<group>"; };
 		7664582B1C4687D100DA581F /* SQLitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLitePlugin.h; path = com.phonegap.plugins.sqlite/SQLitePlugin.h; sourceTree = "<group>"; };
 		7664582C1C4687D100DA581F /* SQLitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLitePlugin.m; path = com.phonegap.plugins.sqlite/SQLitePlugin.m; sourceTree = "<group>"; };
 		766458411C46884400DA581F /* YoikScreenOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YoikScreenOrientation.h; path = "cordova-plugin-screen-orientation/YoikScreenOrientation.h"; sourceTree = "<group>"; };
@@ -413,6 +422,12 @@
 		763B6CB61C4752D800752B77 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				765331981C4B9514008FFD00 /* MessageDigest.h */,
+				765331991C4B9514008FFD00 /* MessageDigest.m */,
+				765331951C4B93B4008FFD00 /* SHA1.h */,
+				765331961C4B93B4008FFD00 /* SHA1.m */,
+				76059CCF1C4B804B00EE3011 /* FRDLivelyButton.h */,
+				76059CD01C4B804B00EE3011 /* FRDLivelyButton.m */,
 				764463DA1C49159A00571245 /* CircleProgressBar.h */,
 				764463DB1C49159A00571245 /* CircleProgressBar.m */,
 				764463D41C490BF700571245 /* MBCircularProgressBarLayer.h */,
@@ -611,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				764463DC1C49159A00571245 /* CircleProgressBar.m in Sources */,
+				765331971C4B93B4008FFD00 /* SHA1.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				7664585D1C46888C00DA581F /* IonicKeyboard.m in Sources */,
 				766458611C4688A100DA581F /* CDVDevice.m in Sources */,
@@ -624,6 +640,7 @@
 				766458551C46886F00DA581F /* CDVViewController+SplashScreen.m in Sources */,
 				76C2DC791C4764FD003E0642 /* YYImageDisplayExample.m in Sources */,
 				76C60E631C47309500F3FF78 /* RootViewController.m in Sources */,
+				7653319A1C4B9514008FFD00 /* MessageDigest.m in Sources */,
 				802110D71B3CE07D00E6B5F6 /* MyHybridPlugin.m in Sources */,
 				766458581C46888000DA581F /* CDVStatusBar.m in Sources */,
 				76C2DC7A1C4764FD003E0642 /* YYImageExampleHelper.m in Sources */,
@@ -633,6 +650,7 @@
 				766458431C46884400DA581F /* YoikScreenOrientation.m in Sources */,
 				766458461C46885000DA581F /* CDVFileTransfer.m in Sources */,
 				763B6CC21C4753F400752B77 /* CALayer+YYAdd.m in Sources */,
+				76059CD11C4B804B00EE3011 /* FRDLivelyButton.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				ED380035D91647E293A5C7AE /* CDVLogger.m in Sources */,
 				763B6CBF1C47533900752B77 /* UIView+YYAdd.m in Sources */,

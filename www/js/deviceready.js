@@ -18,7 +18,7 @@ angular.element(document).ready(function () {
 	}*/
 });
 
-function javaScriptCall(){
+function updateClipThumb(){
 	var scope = angular.element(document.getElementById('idForJS')).scope();
-	scope.test();
+	scope.updateClipThumb();
 }

@@ -17,6 +17,13 @@ angular.module('app.services', [])
 	    return list;
 	};	
 	service.addItem = function(clipID) {
+
+        for(var i=0;i<list.length;i++) {
+            if(list[i]._id == clipID) {                
+                return;
+            }
+        }
+
 		service.getDoc(clipID).then(function(result){
     		list.push(result);
     	});	    	
@@ -31,8 +38,7 @@ angular.module('app.services', [])
     };
 
     //deleteDB();
-    //syncTo();
-    
+    //syncTo();    
     //test();
     
     db.on('error', function (err) {    	
@@ -146,11 +152,8 @@ angular.module('app.services', [])
  	        	}).catch(function(){
  	        		deferred.resolve("DB Existed, Network disconnected");
  	        		ErrorService.showAlert("Network disconnected");
- 	        	});
- 	        	 	        	
- 	        });
-        	
-                            
+ 	        	}); 	        	 	        
+ 	        });        	                            
         }).catch(function(err){            
             syncFromRemote()
             .then(setUpIndex1)
@@ -193,6 +196,10 @@ angular.module('app.services', [])
     	return db.get(id);
     };
 
+    service.put = function(doc) {
+        return db.put(doc);
+    };
+
     service.getAllPlayers = function() {
         return db.find({
         	selector: {type: 'player'}
@@ -215,8 +222,12 @@ angular.module('app.services', [])
         		favorite: true
         	}
         }); 
-    }
-    
+	};
+	
+	service.updateClipThumb = function(clipID) {
+		
+	};
+	
     service.getAllPlayers_old = function() {
         return db.query('index/by_type', {key: 'player', include_docs: true});        
     };
@@ -398,7 +409,127 @@ angular.module('app.services', [])
     return service;    
 })
 
-.factory('ClipService', function($q, $timeout) {
+.factory('ClipService', function(DBService) {
+    var service = {};
+    
+    service.updateClipThumb = function(clipID) {
+        DBService.getDoc(clipID).then(function(result){
+            var clip = result;
+            clip.thumb = clip.image + ".jpg";
+            DBService.put(clip);
+        });
+    };
+    return service;
+})
+
+.factory('FileCacheService', function($q, ImgCache) {
+
+    var service = {};
+
+    service.download = function(src) {
+
+        var deferred = $q.defer();
+               
+        ImgCache.$promise.then(function() {
+
+            ImgCache.cacheFile(src, function() {
+                ImgCache.getCachedFileURL(src, function(src, dest) {
+                    deferred.resolve(dest);
+                });
+            },
+            function() {
+                deferred.reject("download file error");
+            },
+            function(p) {
+                $("#progress").val(p.loaded/p.total);
+            });
+        });
+
+        return deferred.promise;
+    };
+
+    return service;
+})
+
+.factory('AnimationService', function() {
+    
+    var service = {}
+    
+    var win = function(d) {
+        console.log("Bookmark added!");
+                        
+    };
+    var fail = function(e) {
+        console.log(e)
+    };
+    
+    service.playAnimation = function(clipURL) {
+        cordova.exec(win, fail, "MyHybridPlugin", "addBookmark", [clipURL]);
+    };
+    
+    return service;
+})
+
+.factory('ErrorService', function($rootScope, $ionicModal, $cordovaSplashscreen, $ionicPopup, $ionicLoading, $timeout) {
+                
+         
+    var service = {};
+                
+    $ionicModal.fromTemplateUrl('templates/modal.html', {
+        scope: $rootScope,
+        animation: 'slide-in-up',
+        backdropClickToClose: false,
+        hardwareBackButtonClose: false
+    }).then(function(modal) {
+        $rootScope.modal = modal;
+    });
+
+    service.showModal = function() {
+        $rootScope.modal.show();
+    };
+
+    service.hideSplashScreen = function() {
+        $timeout(function() {
+            $cordovaSplashscreen.hide();
+        }, 500);   
+    };
+
+    service.showAlert = function(title) {
+        var alertPopup = $ionicPopup.alert({
+            title: title,
+            template: 'Please try again!'
+        });
+
+        alertPopup.then(function(res) {
+        });
+    };
+
+    service.showDownLoader = function() {
+        $ionicLoading.show({     
+            template: '<span>Downloading...</span><progress max="1" id="progress"></progress>',
+            hideOnStateChange: true
+        });
+    };
+    
+    service.showLoader = function(title) {
+        $ionicLoading.show({
+            template: title,
+            hideOnStateChange: true
+        });
+    };
+
+    service.hideLoader = function(alert) {
+        $ionicLoading.hide();
+        if (alert) {
+            service.showAlert(alert);
+        }       
+    };
+
+    return service;
+})
+
+/*
+.factory('ClipService_new', function($q, $timeout) {
 
     var service = {};
     
@@ -529,113 +660,6 @@ angular.module('app.services', [])
     return service;
 })
 
-.factory('FileCacheService', function($q, ImgCache) {
-
-    var service = {};
-
-    service.download = function(src) {
-
-        var deferred = $q.defer();
-               
-        ImgCache.$promise.then(function() {
-
-            ImgCache.cacheFile(src, function() {
-                ImgCache.getCachedFileURL(src, function(src, dest) {
-                    deferred.resolve(dest);
-                });
-            },
-            function() {
-                deferred.reject("download file error");
-            },
-            function(p) {
-            	$("#progress").val(p.loaded/p.total);
-            });
-        });
-
-        return deferred.promise;
-    };
-
-    return service;
-})
-
-.factory('AnimationService', function() {
-	
-	var service = {}
-	
-	var win = function(d) {
-		console.log("Bookmark added!");
-						
-	};
-	var fail = function(e) {
-		console.log(e)
-	};
-	
-	service.playAnimation = function(clipURL) {
-		cordova.exec(win, fail, "MyHybridPlugin", "addBookmark", [clipURL]);
-	};
-	
-	return service;
-})
-
-.factory('ErrorService', function($rootScope, $ionicModal, $cordovaSplashscreen, $ionicPopup, $ionicLoading, $timeout) {
-				
-		 
-    var service = {};
-				
-    $ionicModal.fromTemplateUrl('templates/modal.html', {
-        scope: $rootScope,
-        animation: 'slide-in-up',
-        backdropClickToClose: false,
-        hardwareBackButtonClose: false
-    }).then(function(modal) {
-        $rootScope.modal = modal;
-    });
-
-    service.showModal = function() {
-        $rootScope.modal.show();
-    };
-
-    service.hideSplashScreen = function() {
-        $timeout(function() {
-            $cordovaSplashscreen.hide();
-        }, 500);   
-    };
-
-    service.showAlert = function(title) {
-        var alertPopup = $ionicPopup.alert({
-            title: title,
-            template: 'Please try again!'
-        });
-
-        alertPopup.then(function(res) {
-        });
-    };
-
-    service.showDownLoader = function() {
-        $ionicLoading.show({     
-            template: '<span>Downloading...</span><progress max="1" id="progress"></progress>',
-            hideOnStateChange: true
-        });
-    };
-    
-    service.showLoader = function(title) {
-        $ionicLoading.show({
-            template: title,
-            hideOnStateChange: true
-        });
-    };
-
-    service.hideLoader = function(alert) {
-        $ionicLoading.hide();
-        if (alert) {
-            service.showAlert(alert);
-        }       
-    };
-
-    return service;
-})
-
-/*
 .factory('ClipService_old', function($q, $timeout, DBService) {
     var service = {};
     var gif = new GifFile();

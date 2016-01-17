@@ -594,6 +594,7 @@ var ImgCache = {
 	ImgCache.cacheFile = function (img_src, success_callback, error_callback, on_progress) {
 
 		if (!Private.isImgCacheLoaded() || !img_src) {
+            if (error_callback) { error_callback(); }
 			return;
         }
 

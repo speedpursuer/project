@@ -41,11 +41,12 @@ angular.module('app.routes', [])
 
     .state('tabsController.clips', {
       url: '/clips/:playerID, :playerName',
+      /*
       resolve: {
         clips: function($stateParams, DBService) {
           return DBService.getClipsByPlayer($stateParams.playerID);         
         }
-      },
+      },*/
       views: {
         'tab1': {
           controller: 'ClipsCtrl',
@@ -54,32 +55,14 @@ angular.module('app.routes', [])
       }
     })
 
-    .state('tabsController.play', {
-      url: '/play/:fileURL, :clipID',      
-      resolve: {
-        gif: function($stateParams, ClipService) {
-          return ClipService.loadFile($stateParams.fileURL);
-        }
-      },
-      //cache: false,
-      onExit: function(ClipService, gif){
-    	  ClipService.destroy(gif);           
-      },
-      views: {
-        'tab1': {
-          controller: 'PlayCtrl',
-          templateUrl: 'templates/play.html',
-        }
-      }
-    })
-
     .state('tabsController.players', {
       url: '/players',
+      /*
       resolve: {
         players: function($stateParams, DBService) {
           return DBService.getAllPlayers();
         }
-      },
+      },*/
       views: {
         'tab2': {
           controller: 'PlayersCtrl',
@@ -90,39 +73,20 @@ angular.module('app.routes', [])
 
     .state('tabsController.tab2Clips', {
       url: '/clips/:playerID, :playerName',    
+      /*
       resolve: {
         clips: function($stateParams, DBService) {
           return DBService.getClipsByPlayer($stateParams.playerID);          
         }
-      },
+      },*/
       views: {
         'tab2': {
-          controller: 'Tab2ClipsCtrl',
+          controller: 'ClipsCtrl',
           templateUrl: 'templates/clips.html',
         }
       }
     })   
-
-    .state('tabsController.tab2play', {
-      url: '/play/:fileURL, :clipID',     
-      
-      resolve: {
-        gif: function($stateParams, ClipService) {
-          //screen.unlockOrientation();
-          return ClipService.loadFile($stateParams.fileURL);
-        }
-      },
-      onExit: function(ClipService, gif){
-    	  ClipService.destroy(gif); 
-      },
-      views: {
-        'tab2': {
-          controller: 'PlayCtrl',
-          templateUrl: 'templates/play.html',
-        }
-      }
-    })
-      
+  
     .state('tabsController.favorite', {
       url: '/favorite',
       /*
@@ -138,9 +102,51 @@ angular.module('app.routes', [])
           templateUrl: 'templates/favorite.html',
         }
       }
-    }) 
-    
-    .state('tabsController.tab3play', {
+    })
+});
+
+
+/*
+ .state('tabsController.play', {
+      url: '/play/:fileURL, :clipID',      
+      resolve: {
+        gif: function($stateParams, ClipService) {
+          return ClipService.loadFile($stateParams.fileURL);
+        }
+      },
+      //cache: false,
+      onExit: function(ClipService, gif){
+        ClipService.destroy(gif);           
+      },
+      views: {
+        'tab1': {
+          controller: 'PlayCtrl',
+          templateUrl: 'templates/play.html',
+        }
+      }
+    })
+
+  .state('tabsController.tab2play', {
+      url: '/play/:fileURL, :clipID',     
+      
+      resolve: {
+        gif: function($stateParams, ClipService) {
+          //screen.unlockOrientation();
+          return ClipService.loadFile($stateParams.fileURL);
+        }
+      },
+      onExit: function(ClipService, gif){
+        ClipService.destroy(gif); 
+      },
+      views: {
+        'tab2': {
+          controller: 'PlayCtrl',
+          templateUrl: 'templates/play.html',
+        }
+      }
+    })
+
+  .state('tabsController.tab3play', {
       url: '/play/:fileURL, :clipID',
       resolve: {
         gif: function($stateParams, ClipService) {
@@ -148,7 +154,7 @@ angular.module('app.routes', [])
         }
       },
       onExit: function(ClipService, gif){
-    	  ClipService.destroy(gif);     
+        ClipService.destroy(gif);     
       },
       views: {
         'tab3': {
@@ -157,4 +163,5 @@ angular.module('app.routes', [])
         }
       }
     })
-});
+
+*/
