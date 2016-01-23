@@ -11,7 +11,7 @@ angular.module('app.routes', [])
       abstract:true,
       templateUrl: 'templates/tabsController.html',
       resolve: {
-    	init: function($stateParams, DBService) {
+      init: function($stateParams, DBService) {
           return DBService.init();
         },
         /*
@@ -28,7 +28,7 @@ angular.module('app.routes', [])
       url: '/player',
       resolve: {
         players: function($stateParams, DBService, init) {
-          return DBService.getAllPlayers();
+          return DBService.getStars();
         }
       },
       views: {
@@ -39,11 +39,26 @@ angular.module('app.routes', [])
       }
     })
 
-    .state('tabsController.clips', {
-      url: '/clips/:playerID, :playerName',
+    .state('tabsController.moves', {
+      url: '/moves/:playerID, :playerName',
       resolve: {
-        clips: function($stateParams, DBService) {
-          return DBService.getClipsByPlayer($stateParams.playerID);         
+        moves: function($stateParams, DBService) {
+          return DBService.getMovesByPlayer($stateParams.playerID);
+        }
+      },
+      views: {
+        'tab1': {
+          controller: 'MovesCtrl',
+          templateUrl: 'templates/moves.html',
+        }
+      }
+    })  
+
+    .state('tabsController.clips', {      
+      url: '/clips/:playerID, :playerName, :moveName',
+      resolve: {
+        clips: function($stateParams, DBService) {          
+          return DBService.getClipsByPlayer($stateParams.playerID, $stateParams.moveName);          
         }
       },
       views: {
@@ -56,24 +71,40 @@ angular.module('app.routes', [])
 
     .state('tabsController.players', {
       url: '/players',
+      /*
       resolve: {
-        players: function($stateParams, DBService) {
-          return DBService.getAllPlayers();
+        players: function($stateParams, DBService, init) {
+          return DBService.getAllPlayers_();
         }
-      },
+      },*/
       views: {
         'tab2': {
           controller: 'PlayersCtrl',
           templateUrl: 'templates/players.html',
         }
       }
-    }) 
+    })
+
+    .state('tabsController.tab2Moves', {
+      url: '/moves2/:playerID, :playerName',
+      resolve: {
+        moves: function($stateParams, DBService) {
+          return DBService.getMovesByPlayer($stateParams.playerID);
+        }
+      },
+      views: {
+        'tab2': {
+          controller: 'Tab2MovesCtrl',
+          templateUrl: 'templates/moves.html',
+        }
+      }
+    })  
 
     .state('tabsController.tab2Clips', {
-      url: '/clips/:playerID, :playerName',
+      url: '/clips2/:playerID, :playerName, :moveName',
       resolve: {
         clips: function($stateParams, DBService) {
-          return DBService.getClipsByPlayer($stateParams.playerID);          
+          return DBService.getClipsByPlayer($stateParams.playerID, $stateParams.moveName);          
         }
       },
       views: {
@@ -129,7 +160,7 @@ angular.module('app.routes', [])
       resolve: {
         gif: function($stateParams, ClipService) {
           //screen.unlockOrientation();
-          return ClipService.loadFile($stateParams.fileURL);
+        return ClipService.loadFile($stateParams.fileURL);
         }
       },
       onExit: function(ClipService, gif){

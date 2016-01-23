@@ -4,190 +4,385 @@ angular.module('app.services', [])
 
     var service = {};
 
-    //var dbName = "bboy", remoteURL = "http://admin:12341234@localhost:5984/";    
-    var dbName = "bboy", remoteURL = "http://121.40.197.226:4984/";
-    var db = pouchdb.create(dbName, {adapter: 'websql'}), remoteDB = pouchdb.create(remoteURL + dbName);
-            
-    var list = [];	
-		  
-    service.setItems = function(_list) {			 			    			    	
-    	list = _list;
-    };
-	service.getItems = function(){
-	    return list;
-	};	
-	service.addItem = function(clipID) {
+    //var dbName = "ballroad_test", remoteURL = "http://admin:12341234@localhost:5984/";
+    var dbName = "ballroad", remoteURL = "http://121.40.197.226:4984/";
+    //var dbName = "ballroad", remoteURL = "http://admin:12341234@localhost:5984/";
 
-        for(var i=0;i<list.length;i++) {
-            if(list[i]._id == clipID) {                
+    var db = pouchdb.create(dbName, {adapter: 'websql'});//, remoteDB = pouchdb.create(remoteURL + dbName);
+
+    //deleteDB();
+    //syncTo();        
+    //setupView();    
+    //testFun();
+    //testView();    
+
+    function map(doc) {      
+        if (doc.type === 'local') {
+            emit(doc.favorite, {_id : doc.clip, thumb: doc.thumb});
+        }
+    }
+
+    function map_r(doc) {      
+        if (doc.type === 'clip') {
+            emit(doc._id, {_id : doc.local, desc: doc.desc, name: doc.name, image: doc.image});
+        }
+    }
+
+    function testView() {
+
+        //var keys = [true];
+        //var keys = ['clip8', 'clip3'];
+        //db.query('views/moves', {startkey: ['player1'], endkey: ['player1', {}], reduce: true, group: true}).then(function (result) {
+        //db.query('views/players', {reduce: true, group: true}).then(function (result) {            
+        //db.query(map_r, {include_docs : true, keys: keys}).then(function (result) {
+        db.query(map_r, {include_docs : true}).then(function (result) {
+            console.log(result);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
+
+    function syncTo() {
+        return db.replicate.to(remoteURL + "ballroad_test", {
+            live: false,
+            retry: false,            
+            doc_ids: ['Crossover', 'Dribble', 'Dunk', 'Layup', 'Pass', 'Shoot', 'TripleThreat', 
+            'clip1', 'clip2', 'clip3', 'clip4', 'clip5', 'clip6', 'clip7', 'clip8', 'clip9',
+            'player1', 'player2', 'player3', 'player4' 
+            ]
+        }).then(function(result){
+            console.log(result);
+        }).catch(function(err){
+            console.log(err);
+        });        
+    }
+
+            
+    var favoriteList = [];
+
+    var playerList = [];	
+
+
+    service.setPlayerList = function(_list) {                                               
+        playerList = _list;
+        /*
+        for(i in playerList) {
+            ImgCacheService.cacheImg(playerList[i].avatar);
+        }*/
+    };
+
+    service.getPlayerList = function() {
+        return playerList;
+    };
+		  
+    service.setFavoriteList = function(_list) {			 			    			    	
+    	favoriteList = _list;
+        /*
+        for(i in favoriteList) {
+            ImgCacheService.cacheImg(favoriteList[i].thumb);
+        }*/
+    };
+	service.getFavoriteList = function(){
+	    return favoriteList;
+	};	
+	service.addFavorite = function(clipID) {
+
+        for(var i=0;i<favoriteList.length;i++) {
+            if(favoriteList[i]._id == clipID) {                
                 return;
             }
         }
 
+        db.query('views/local', {include_docs : true, key: clipID}).then(function (result) {
+                                               
+            result = result.rows.map(function(row) {
+                var thumb = "", favorite = false;
+                if (row.doc) {
+                    thumb = row.doc.thumb;
+                    favorite = row.doc.favorite;
+                }
+                return {
+                    _id: row.id,
+                    name: row.value.name,
+                    desc: row.value.desc,
+                    image: row.value.image,
+                    local: row.value.local,
+                    thumb: thumb,
+                    favorite: favorite                        
+                };
+            });
+            
+            favoriteList.push(result[0]);                        
+
+        }).catch(function (err) {                
+            deferred.reject(err);                
+        });
+        /*
 		service.getDoc(clipID).then(function(result){
-    		list.push(result);
-    	});	    	
+    		favoriteList.push(result);
+    	});*/
     };
-	service.removeItem = function(clipID) {	    	
-    	for(var i=0;i<list.length;i++) {
-    		if(list[i]._id == clipID) {
-    			list.splice(i,1);
+	service.removeFavorite = function(clipID) {	    	
+    	for(var i=0;i<favoriteList.length;i++) {
+    		if(favoriteList[i]._id == clipID) {
+    			favoriteList.splice(i,1);
     			return true;
     		}
     	}
     };
+    
+    function testFun() {
 
-    //deleteDB();
-    //syncTo();    
-    //test();
-    
-    db.on('error', function (err) {    	
-    	console.log(err);
-    });
-    
-    //add();
-    
-    //test1();
-    
-    //find();
-    
-    function find() {
-    	db.find({
-        	selector: {
-        		type: 'clip',
-        		//favorite: true
-        	}
-        }).then(function(result ){
-        	console.log(result);
-        }).catch(function(err) {
-        	console.log(err)
-        }); 
-    }
-    
-    function add() {
-    	return db.put(
-    		{
-    			_id: "local_clip1",
-    			favorite: true,
-    			type: "local_ref",
-    			localURL: "file://abc.gif",
-    			//clipID: "clip1"
-    		}
-    	);
-    }
-    
-    function test1() {
-    	db.query(map1, {include_docs : true}).then(function (result) {
-    		console.log(result);
-    	}).catch(function (err) {
-    		console.log(err);
-    	});
-    }
-    
-    function map1(doc) {
-    	if (doc.type === 'local_ref') {
-    	    emit(doc.localURL, {_id: doc.local_clipID});
-    	}
-    }
+        var deferred = $q.defer();
+
+        var playerID = 'player1';
+
+        var moveName = 'Crossover';
+
+        db.query('views/clips', {startkey: [playerID, moveName], endkey: [playerID, moveName, {}], reduce: true, group: true}).then(function (result) {
+            
+            console.log(result);
+
+            var keys = [];
+            
+            for(i in result.rows) {
+                keys.push(result.rows[i].value);
+            }
+
+            db.allDocs({
+                include_docs: true,
+                keys: keys
+            }).then(function (result) {
+                                               
+                result = result.rows.map(function(row) {
+                    return row.doc;
+                });
+                
+                deferred.resolve(result);             
+
+            }).catch(function (err) {                
+                deferred.reject(err);                
+            });
+        }).catch(function (err) {
+            deferred.reject(err);
+        });
         
-    function map2(doc) {
-    	if (doc.type === 'clip') {
-    	    emit({_id : doc.clipID, image : doc.image});
-    	}
     }
-    
-    function test_() {
-    	db.query('index/clips_by_playerID_local', {key: "player1", include_docs: true}).then(function (result) {
-    		console.log(result);
-    	}).catch(function (err) {
-    		console.log(err);
-    	});
-    }
-    
-    function map(doc) {
-    	// join artist data to albums
-    	if (doc.type === 'clip') {
-    		emit({_id : doc.clipID, favorite : doc.favorite});
-    	}
-	}
-       
-    
-    function test() {
-    	db.query(map, {include_docs : true}).then(function (result) {
-    		console.log(result);
-    	}).catch(function (err) {
-    		console.log(err);
-    	});
-    }
-    
-    function installDB() {
-    	syncFromRemote()
-        .then(setUpIndex1)
-        .then(setUpIndex2)
-        //.then(setupView)            
-        //.then(setUpFavorite)
-        .then(markInstalled)
-        .then(function(){
-        	deferred.resolve("DB Created");
-        })
-        .catch(function (err){
-            console.log(err);
-            ErrorService.showModal();
-            ErrorService.hideSplashScreen();
-            deferred.reject(err);            
-        });   
-    }
-    
-    //function 
-	
+
+    function setupView() {
+        var ddoc = {
+            _id: '_design/views',
+            views: {
+                players: {
+                    map: function(doc) {
+                        var player, clip;
+                        if (doc.move_name && doc.clip_player) {
+                            for (clip in doc.clip_player) {
+                                player = doc.clip_player[clip];                                
+                                emit(player, clip);
+                                //emit([player, clip], 1);
+                            }
+                        }
+                    }.toString(),
+                    reduce: "_count"
+                    /*
+                    reduce: function(key, values, rereduce) {
+                        return sum(values);
+                    }.toString()*/
+                },
+                moves: {
+                    map: function(doc) {
+                        var player, clip;
+                        if (doc.move_name && doc.clip_player && doc.image) {
+                            for (clip in doc.clip_player) {
+                                player = doc.clip_player[clip];                                
+                                emit([player, doc.move_name, doc.image], 1);
+                            }
+                        }
+                    }.toString(),
+                    reduce: function(key, values, rereduce) {
+                        return sum(values);
+                    }.toString()
+                },
+                clips: {
+                    map: function(doc) {
+                        var player, clip;
+                        if (doc.move_name && doc.clip_player) {
+                            for (clip in doc.clip_player) {
+                                player = doc.clip_player[clip];
+                                emit([player, doc.move_name], clip);
+                            }
+                        }
+                    }.toString()                     
+                },
+                local: {
+                    map: function(doc) {      
+                        if (doc.type === 'clip') {
+                            emit(doc._id, {_id : doc.local, desc: doc.desc, name: doc.name, image: doc.image, local: doc.local});
+                        }
+                    }.toString()
+                },
+                favorite: {
+                    map: function(doc) { 
+                        if (doc.type === 'local') {
+                            emit(doc.favorite, {_id : doc.clip, thumb: doc.thumb});
+                        }
+                    }.toString()
+                }
+            }   
+        };
+        return db.put(ddoc);
+    }    
+
+    service.getAllPlayers = function() {       
+        return retrieveAllPlayers();
+    };    
+
+    service.getMovesByPlayer = function(playerID) {
+        var deferred = $q.defer();
+        
+        db.query('views/moves', {startkey: [playerID], endkey: [playerID, {}], reduce: true, group: true}).then(function (result) {
+                      
+            var moves = [];
+
+            for(i in result.rows) {                                
+                moves.push({name: result.rows[i].key[1], image: result.rows[i].key[2], clipQty: result.rows[i].value});
+            }
+            deferred.resolve(moves);
+
+        }).catch(function (err) {
+            deferred.reject(err);
+        }); 
+
+        return deferred.promise;       
+    };
+
+    service.getClipsByPlayer = function(playerID, moveName) {
+
+        var deferred = $q.defer();
+     
+        db.query('views/clips', {startkey: [playerID, moveName], endkey: [playerID, moveName, {}], reduce: true, group: true}).then(function (result) {
+            
+            var keys = [];
+            
+            for(i in result.rows) {
+                keys.push(result.rows[i].value);
+            }
+
+            db.query('views/local', {include_docs : true, keys: keys}).then(function (result) {
+                                               
+                result = result.rows.map(function(row) {
+                    var thumb = "", favorite = false;
+                    if (row.doc) {
+                        thumb = row.doc.thumb;
+                        favorite = row.doc.favorite;
+                    }
+                    return {
+                        _id: row.id,
+                        name: row.value.name,
+                        desc: row.value.desc,
+                        image: row.value.image,
+                        local: row.value.local,
+                        thumb: thumb,
+                        favorite: favorite                        
+                    };
+                });
+                
+                deferred.resolve(result);             
+
+            }).catch(function (err) {                
+                deferred.reject(err);                
+            });
+        }).catch(function (err) {
+            deferred.reject(err);
+        });
+
+        return deferred.promise;
+    };
+
+
+    service.getStars = function() {
+        return db.find({
+            selector: {type: 'player', star: true}
+        });        
+    };
+
     service.init = function() {
         var deferred = $q.defer();    
-        isDBInstalled().then(function(doc){
-        		
-        	service.getFavorite().then(function(result){
-        		service.setItems(result.docs);
- 	        	
- 	        	syncFromRemote().then(function() {
- 	        		deferred.resolve("DB Existed");
- 	        	}).catch(function(){
- 	        		deferred.resolve("DB Existed, Network disconnected");
- 	        		ErrorService.showAlert("Network disconnected");
- 	        	}); 	        	 	        
- 	        });        	                            
-        }).catch(function(err){            
+        isDBInstalled()
+        .then(function() {
+            retrieveAllPlayers()
+            .then(retrieveFavorite)
+            .then(syncFromRemote)
+            .then(function() {
+                deferred.resolve("DB Existed");
+            }).catch(function(){
+                deferred.resolve("DB Existed, Network disconnected");
+                ErrorService.showAlert("Network disconnected");
+            }); 
+        }).catch(function() {
             syncFromRemote()
+            .then(setupView)
             .then(setUpIndex1)
-            .then(setUpIndex2)
-            //.then(setupView)            
-            //.then(setUpFavorite)
             .then(markInstalled)
-            .then(function(){
-            	service.getFavorite().then(function(result){
-            		service.setItems(result.docs);
-     	        	deferred.resolve("DB Created"); 	        	
-     	        });
-            })
-            .catch(function (err){
-                console.log(err);
+            .then(retrieveAllPlayers)
+            .then(retrieveFavorite)
+            .then(function() {
+                deferred.resolve("DB Created");
+            }).catch(function (err){                
                 ErrorService.showModal();
                 ErrorService.hideSplashScreen();
                 deferred.reject(err);            
-            });   
+            });
         });
+      
         return deferred.promise;        
     };
+	
+    function retrieveAllPlayers() {
+        var deferred = $q.defer();
 
-    service.init_ = function() {
-        var deferred = $q.defer();    
-        syncFromRemote().then(function(doc){
-            deferred.resolve("sync successful");                
-        }).catch(function(err) {
-            deferred.resolve("sync failed");                            
-            ErrorService.showAlert("Network disconnected");                 
+        db.query('views/players', {reduce: true, group: true, group_level: 2}).then(function (result) {            
+            
+            var keys = [], qtys = [];
+            
+            for(i in result.rows) {
+                keys.push(result.rows[i].key);
+                qtys.push(result.rows[i].value);
+            }
+
+            db.allDocs({
+                include_docs: true,
+                keys: keys
+            }).then(function (result) {
+                                
+                for(i in result.rows) {
+                    result.rows[i].doc.clipQty = qtys[i];
+                }     
+
+                result = result.rows.map(function(row) {
+                    return row.doc;
+                });
+
+                service.setPlayerList(result);
+
+                deferred.resolve("All players retrieved");
+
+            }).catch(function (err) {
+                deferred.reject(err);
+            });
+
+        }).catch(function (err) {
+            deferred.reject(err);
         });
-        return deferred.promise;   
-    };
 
+        return deferred.promise;
+    }
+
+    function retrieveFavorite() {
+
+    }
+    
     service.syncRemote = function() {
         return syncFromRemote();
     };
@@ -199,66 +394,39 @@ angular.module('app.services', [])
     service.put = function(doc) {
         return db.put(doc);
     };
-
-    service.getAllPlayers = function() {
-        return db.find({
-        	selector: {type: 'player'}
-        });        
-    };
-    
-    service.getClipsByPlayer = function(id) {
-        return db.find({
-        	selector: {
-        		type: 'clip',
-        		playerID: id
-        	}
-        });
-    };
     
     service.getFavorite = function() {
-    	return db.find({
-        	selector: {
-        		type: 'clip',
-        		favorite: true
-        	}
-        }); 
-	};
-	
-	service.updateClipThumb = function(clipID) {
-		
-	};
-	
-    service.getAllPlayers_old = function() {
-        return db.query('index/by_type', {key: 'player', include_docs: true});        
+        return retrieveFavorite();
     };
 
-    service.getClipsByPlayer_old = function(playerID) {
-        return db.query('index/by_playerID', {key: playerID, include_docs: true});
-    };
+    function retrieveFavorite() {
 
-    service.setLocalClip_new = function(clipID, dest, local) {
-        db.find({
-        	selector: {
-        		type: "local", 
-        		clipID: clipID        		
-        	}
-        }).then(function(result) {
-        	var doc = result.docs[0];
-        	if(doc) {
-        		doc.local = local;
-        		doc.image = dest;
-        	} else {        		
-        		doc = {
-        			_id: "local_" + clipID,
-        			type: "local",
-        			clipID: clipID,
-        			local: local,
-        			image: dest
-        		}        		
-        	}
-        	return db.put(doc);
-        });
-    };
+        var deferred = $q.defer();
+        
+        db.query('views/favorite', {include_docs : true, keys: [true]}).then(function (result) {
+                                               
+            result = result.rows.map(function(row) {
+                return {
+                    _id: row.doc._id,
+                    name: row.doc.name,
+                    desc: row.doc.desc,
+                    image: row.doc.image,
+                    thumb: row.value.thumb,
+                    favorite: row.key,
+                    local: row.id
+                };
+            });
+
+            service.setFavoriteList(result);
+
+            deferred.resolve("Favorite retrieved");                        
+
+        }).catch(function (err) {                
+            deferred.reject(err);                
+        });    
+
+        return deferred.promise;   
+    }	
     
     service.setLocalClip = function(clipID, dest) {
         var deferred = $q.defer();
@@ -276,43 +444,64 @@ angular.module('app.services', [])
         return deferred.promise;
     };
     
-    service.setFavorite = function(clipID, favorite) {        
-        db.get(clipID).then(function(clip) {
-            clip.favorite = favorite;
-            db.put(clip).then(function() {                
-                setFavoriteBackup(clipID, favorite);
-            });
+    service.updateFavorite = function(clipID, localID, flag) {        
+        db.get(localID).then(function(local) {
+            local.favorite = flag;
+            db.put(local);            
+        }).catch(function(){
+            var local = {
+                _id: localID,
+                type: "local",
+                favorite: flag,
+                thumb: "",
+                clip: clipID               
+            }
+            db.put(local);
         });
+        if(flag) {
+            service.addFavorite(clipID);
+        } else {
+            service.removeFavorite(clipID);
+        }       
     };
-    
-    function setFavoriteBackup(_clipID, flag) {
-    	db.find({
-        	selector: {
-        		type: "favorite", 
-        		clipID: _clipID        		
-        	}
-        }).then(function(result) {
-        	var doc = result.docs[0];
-        	if(doc) {
-        		doc.favorite = flag;
-        		db.put(doc);
-        	} else {
-        		var id = "local";
-        		if ( typeof(device) !== "undefined") {
-        			id = device.uuid;
-        		}
-        		var favorite = {
-        			_id: id + "_" + _clipID,
-        			type: "favorite",
-        			clipID: _clipID,
-        			user: id,
-        			favorite: flag
-        		}
-        		db.put(favorite);
-        	}
-        });
-    }
-    
+
+    service.updateThumb = function(clipID, curClipList) {
+
+        var post_fix = ".jpg";
+
+        var updateList = function(list) {
+            if(list && list.length > 0) {
+                for(i in list) {
+                    if(list[i]._id == clipID) {                
+                        list[i].thumb = list[i].image + post_fix;
+                        return;
+                    }
+                }        
+            }            
+        };
+
+        db.get(clipID).then(function(clip) {
+
+            db.get(clip.local).then(function(local) {
+                local.thumb = clip.image + post_fix;
+                db.put(local);
+            }).catch(function(){
+                var local = {
+                    _id: clip.local,
+                    type: "local",
+                    favorite: false,
+                    thumb: clip.image + post_fix,
+                    clip: clipID            
+                }
+                db.put(local);
+            });
+
+            updateList(favoriteList);
+            updateList(curClipList);
+                     
+        });                
+    };
+
     function deleteDB() {      
         db.destroy().then(function (response) {
             console.log(response);
@@ -325,44 +514,7 @@ angular.module('app.services', [])
         return db.replicate.from(remoteURL + dbName);
     }
 
-    function setupView() {
-        var ddoc = {
-            _id: '_design/index',
-            views: {
-                clips_favorite: {
-                    map: function(doc) {
-                    	if (doc.type === 'clip') {
-                    		emit(doc.playerID, {_id : doc.clipID, favorite : doc.favorite});
-                    	}
-                    }.toString()
-                }                
-            }   
-        };
-        return db.put(ddoc);
-    }
-    
-    function setupView_old() {
-        var ddoc = {
-            _id: '_design/index',
-            views: {
-                by_type: {
-                    map: function(doc) {
-                        if (doc.type) {
-                            emit(doc.type);
-                        }
-                    }.toString()
-                },
-                by_playerID: {
-                    map: function(doc) {
-                        if (doc.playerID && doc.type==='clip') {
-                            emit(doc.playerID);
-                        }
-                    }.toString()
-                }
-            }   
-        };
-        return db.put(ddoc);
-    }
+
     
     function setUpIndex1() {
     	return db.createIndex({
@@ -399,26 +551,30 @@ angular.module('app.services', [])
         return db.get('DBInstalled');
     }
 
-    function syncTo() {
-        return db.replicate.to(remoteURL + dbName, {
-            live: false,
-            retry: false
-        });
-    }
-
     return service;    
 })
 
-.factory('ClipService', function(DBService) {
+.factory('ImgCacheService', function($q, ImgCache) {
+
     var service = {};
-    
-    service.updateClipThumb = function(clipID) {
-        DBService.getDoc(clipID).then(function(result){
-            var clip = result;
-            clip.thumb = clip.image + ".jpg";
-            DBService.put(clip);
-        });
-    };
+
+    service.cacheImg = function(src) {
+        var img = new Image();
+        fatchImg(img, src);
+    }
+
+    function fatchImg(el, src) {
+        ImgCache.isCached(src, function(path, success) {
+            if (success) {
+                ImgCache.useCachedFileWithSource(el, src);
+            } else {
+                ImgCache.cacheFile(src, function() {
+                    ImgCache.useCachedFileWithSource(el, src);
+                });
+            }
+        });    
+    }
+
     return service;
 })
 
@@ -455,16 +611,17 @@ angular.module('app.services', [])
     
     var service = {}
     
-    var win = function(d) {
-        console.log("Bookmark added!");
-                        
+    var win = function(d) {                                
     };
+    
     var fail = function(e) {
         console.log(e)
     };
     
-    service.playAnimation = function(clipURL) {
-        cordova.exec(win, fail, "MyHybridPlugin", "addBookmark", [clipURL]);
+    service.playAnimation = function(clipURL, favorite, showFavBut) {
+        favorite = favorite? "true": "false";
+        showFavBut = showFavBut? "true": "false";
+        cordova.exec(win, fail, "MyHybridPlugin", "playClip", [clipURL, favorite, showFavBut]);
     };
     
     return service;
@@ -529,6 +686,113 @@ angular.module('app.services', [])
 })
 
 /*
+
+service.getClipsByPlayer_ = function(id) {
+        return db.find({
+            selector: {
+                type: 'clip',
+                playerID: id
+            }
+        });
+    };
+    
+    service.getFavorite_ = function() {
+        return db.find({
+            selector: {
+                type: 'clip',
+                favorite: true
+            }
+        }); 
+    };
+
+service.setFavorite_ = function(clipID, favorite) {        
+        db.get(clipID).then(function(clip) {
+            clip.favorite = favorite;
+            db.put(clip).then(function() {                
+                setFavoriteBackup(clipID, favorite);
+            });
+        });
+    };
+    
+    function setFavoriteBackup(_clipID, flag) {
+        db.find({
+            selector: {
+                type: "favorite", 
+                clipID: _clipID             
+            }
+        }).then(function(result) {
+            var doc = result.docs[0];
+            if(doc) {
+                doc.favorite = flag;
+                db.put(doc);
+            } else {
+                var id = "local";
+                if ( typeof(device) !== "undefined") {
+                    id = device.uuid;
+                }
+                var favorite = {
+                    _id: id + "_" + _clipID,
+                    type: "favorite",
+                    clipID: _clipID,
+                    user: id,
+                    favorite: flag
+                }
+                db.put(favorite);
+            }
+        });
+    }
+
+.factory('ClipService', function(DBService) {
+    var service = {};
+    
+    service.updateClipThumb = function(clipID) {
+        DBService.getDoc(clipID).then(function(result){
+            var clip = result;
+            clip.thumb = clip.image + ".jpg";
+            DBService.put(clip);
+        });
+    };
+    return service;
+})
+
+service.init_ = function() {
+        var deferred = $q.defer();    
+        isDBInstalled()
+        .then(retrieveAllPlayers)
+        .then(function(){           
+            service.getFavorite().then(function(result){
+                service.setItems(result.docs);              
+                syncFromRemote().then(function() {
+                    deferred.resolve("DB Existed");
+                }).catch(function(){
+                    deferred.resolve("DB Existed, Network disconnected");
+                    ErrorService.showAlert("Network disconnected");
+                });                             
+            });                                     
+        }).catch(function(err){            
+            syncFromRemote()
+            .then(setupView)
+            .then(setUpIndex1)            
+            //.then(setUpFavorite)
+            .then(markInstalled)
+            .then(retrieveAllPlayers)
+            .then(function(){
+                service.getFavorite().then(function(result){
+                    service.setItems(result.docs);
+                    deferred.resolve("DB Created");                 
+                });
+            })
+            .catch(function (err){
+                console.log(err);
+                ErrorService.showModal();
+                ErrorService.hideSplashScreen();
+                deferred.reject(err);            
+            });   
+        });
+        return deferred.promise;        
+    };
+
+
 .factory('ClipService_new', function($q, $timeout) {
 
     var service = {};
@@ -981,5 +1245,180 @@ angular.module('app.services', [])
         }
     };	
 });
+
+function find() {
+        db.find({
+            selector: {
+                type: 'clip',
+                //favorite: true
+            }
+        }).then(function(result ){
+            console.log(result);
+        }).catch(function(err) {
+            console.log(err)
+        }); 
+    }
+    
+    function add() {
+        return db.put(
+            {
+                _id: "local_clip1",
+                favorite: true,
+                type: "local_ref",
+                localURL: "file://abc.gif",
+                //clipID: "clip1"
+            }
+        );
+    }
+    
+    function test1() {
+        db.query(map1, {include_docs : true}).then(function (result) {
+            console.log(result);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
+    
+    function map1(doc) {
+        if (doc.type === 'local_ref') {
+            emit(doc.localURL, {_id: doc.local_clipID});
+        }
+    }
+        
+    function map2(doc) {
+        if (doc.type === 'clip') {
+            emit({_id : doc.clipID, image : doc.image});
+        }
+    }
+    
+    function test_() {
+        db.query('index/clips_by_playerID_local', {key: "player1", include_docs: true}).then(function (result) {
+            console.log(result);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
+    
+    function map(doc) {
+        // join artist data to albums
+        if (doc.type === 'clip') {
+            emit({_id : doc.clipID, favorite : doc.favorite});
+        }
+    }
+       
+    
+    function test() {
+        db.query(map, {include_docs : true}).then(function (result) {
+            console.log(result);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    }
+    
+    function installDB() {
+        syncFromRemote()
+        .then(setUpIndex1)
+        .then(setUpIndex2)
+        //.then(setupView)            
+        //.then(setUpFavorite)
+        .then(markInstalled)
+        .then(function(){
+            deferred.resolve("DB Created");
+        })
+        .catch(function (err){
+            console.log(err);
+            ErrorService.showModal();
+            ErrorService.hideSplashScreen();
+            deferred.reject(err);            
+        });   
+    }
+    
+    service.init_ = function() {
+        var deferred = $q.defer();    
+        syncFromRemote().then(function(doc){
+            deferred.resolve("sync successful");                
+        }).catch(function(err) {
+            deferred.resolve("sync failed");                            
+            ErrorService.showAlert("Network disconnected");                 
+        });
+        return deferred.promise;   
+    };
+    
+    service.getAllPlayers_old = function() {
+        return db.query('index/by_type', {key: 'player', include_docs: true});        
+    };
+
+    service.getClipsByPlayer_old = function(playerID) {
+        return db.query('index/by_playerID', {key: playerID, include_docs: true});
+    };
+
+    service.setLocalClip_new = function(clipID, dest, local) {
+        db.find({
+            selector: {
+                type: "local", 
+                clipID: clipID              
+            }
+        }).then(function(result) {
+            var doc = result.docs[0];
+            if(doc) {
+                doc.local = local;
+                doc.image = dest;
+            } else {                
+                doc = {
+                    _id: "local_" + clipID,
+                    type: "local",
+                    clipID: clipID,
+                    local: local,
+                    image: dest
+                }               
+            }
+            return db.put(doc);
+        });
+    };
+
+    function setupView_() {
+        var ddoc = {
+            _id: '_design/index',
+            views: {
+                clips_favorite: {
+                    map: function(doc) {
+                        if (doc.type === 'clip') {
+                            emit(doc.playerID, {_id : doc.clipID, favorite : doc.favorite});
+                        }
+                    }.toString()
+                }                
+            }   
+        };
+        return db.put(ddoc);
+    }
+    
+    function setupView_old() {
+        var ddoc = {
+            _id: '_design/index',
+            views: {
+                by_type: {
+                    map: function(doc) {
+                        if (doc.type) {
+                            emit(doc.type);
+                        }
+                    }.toString()
+                },
+                by_playerID: {
+                    map: function(doc) {
+                        if (doc.playerID && doc.type==='clip') {
+                            emit(doc.playerID);
+                        }
+                    }.toString()
+                }
+            }   
+        };
+        return db.put(ddoc);
+    }
+    
+    db.on('error', function (err) {     
+        console.log(err);
+    });
+    
+
 */
     

@@ -13,13 +13,14 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
     ImgCacheProvider.setOptions({
     	//debug: true,
     	usePersistentCache: true,
-    	useDataURI: true
+    	useDataURI: true,
+		skipURIencoding: true
     });
 
     $ionicConfigProvider.views.swipeBackEnabled(false);
 })
 
-.run(function($ionicPlatform, $cordovaStatusbar, $rootScope, ClipService) {
+.run(function($ionicPlatform, $cordovaStatusbar, $rootScope) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)

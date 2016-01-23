@@ -2,12 +2,12 @@
 //  MyHybridPlugin.h
 //  HybridIOSApp
 //
-//  Created by Holly Schinsky on 6/25/15.
+//  Created by 邢磊 on 16/1/14.
 //
 //
 
 #import <Cordova/CDVPlugin.h>
 
 @interface MyHybridPlugin : CDVPlugin
-- (void)addBookmark:(CDVInvokedUrlCommand*) command;
+- (void)playClip:(CDVInvokedUrlCommand*) command;
 @end

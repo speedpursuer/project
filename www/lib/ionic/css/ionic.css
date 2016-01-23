@@ -10488,7 +10488,7 @@ a.button .icon:before,a.button.icon:before,a.button.icon-left:before,a.button.ic
 }
 
 .row+.row {
-	margin-top: -5px;
+	margin-top: 10px;
 	padding-top: 0;
 }
 

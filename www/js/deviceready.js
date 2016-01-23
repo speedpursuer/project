@@ -19,6 +19,16 @@ angular.element(document).ready(function () {
 });
 
 function updateClipThumb(){
-	var scope = angular.element(document.getElementById('idForJS')).scope();
-	scope.updateClipThumb();
+	var scope = angular.element(document.getElementById('ClipsScopeID')).scope();
+	scope.updateThumbFromNative();
+}
+
+function updateClipThumbForFavorite(){
+    var scope = angular.element(document.getElementById('FavoriteScopeID')).scope();
+    scope.updateThumbFromNative();
+}
+
+function updateClipFavorite(){
+    var scope = angular.element(document.getElementById('ClipsScopeID')).scope();
+    scope.updateFavoriteFromNative();
 }

@@ -22,31 +22,5 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LUn-MO-18R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Image Display Example-->
-        <scene sceneID="CSm-bo-Nfk">
-            <objects>
-                <viewController id="t56-cx-7X5" customClass="YYImageDisplayExample" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="15y-VH-aNn"/>
-                        <viewControllerLayoutGuide type="bottom" id="HvO-Kr-pK6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3q9-ig-vBH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ee5-tp-kbX">
-                                <rect key="frame" x="9" y="7" width="46" height="30"/>
-                                <state key="normal" title="Close"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gny-01-yfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="268" y="-471"/>
-        </scene>
     </scenes>
 </document>

@@ -2,30 +2,25 @@
 //  MyHybridPlugin.m
 //  HybridIOSApp
 //
-//  Created by Holly Schinsky on 6/25/15.
+//  Created by 邢磊 on 16/1/14.
 //
 //
+
 #import "MyHybridPlugin.h"
 #import "MainViewController.h"
-#import "YYImageDisplayExample.h"
+#import "ClipPlayController.h"
 
 @implementation MyHybridPlugin
--(void)addBookmark_:(CDVInvokedUrlCommand*) command {
-    NSString* bookmark = [command.arguments objectAtIndex:0];
+-(void)playClip_:(CDVInvokedUrlCommand*) command {
+    NSString* clipURL = [command.arguments objectAtIndex:0];
     
-    if(bookmark) {
+    if(clipURL) {
 		
         MainViewController* mvc = (MainViewController*)[self viewController];
 		
-//		NSArray *controllers = [mvc.navigationController viewControllers];
-//		
-//		MainViewController* a =[controllers objectAtIndex:0];
-//		
-//		[a.webView stringByEvaluatingJavaScriptFromString:@"javaScriptCall();"];
+		ClipPlayController *vc = [ClipPlayController new];
 		
-		YYImageDisplayExample *vc = [YYImageDisplayExample new];
-		
-		vc.clipURL = bookmark;
+		vc.clipURL = clipURL;
 		
 		[mvc.navigationController pushViewController:vc animated:YES];
 		[mvc.navigationController setNavigationBarHidden:NO];
@@ -40,31 +35,28 @@
     }
 }
 
--(void)addBookmark:(CDVInvokedUrlCommand*) command {
-	NSString* bookmark = [command.arguments objectAtIndex:0];
+-(void)playClip:(CDVInvokedUrlCommand*) command {
+	NSString* clipURL = [command.arguments objectAtIndex:0];
+	NSString* favorite = [command.arguments objectAtIndex:1];
+	NSString* showLike = [command.arguments objectAtIndex:2];
 	
-	if(bookmark) {
+	if(clipURL) {
 		
 		MainViewController* mvc = (MainViewController*)[self viewController];
+				
 		
-		//YYImageDisplayExample *vc = [YYImageDisplayExample new];
+		ClipPlayController *vc = [[ClipPlayController alloc] init];
 		
-		YYImageDisplayExample *vc = [[YYImageDisplayExample alloc] init];
-		
-		vc.clipURL = bookmark;
-		
+		vc.clipURL = clipURL;
+		vc.favorite = [favorite isEqual: @"true"];
+		vc.showLike = [showLike isEqual: @"true"];
 		//vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-		
-
-		
 		//vc.modalPresentationStyle = UIModalPresentationPageSheet;
 		vc.modalPresentationStyle = UIModalPresentationCurrentContext;
 		
 		vc.delegate = mvc;
 		
 		[mvc presentViewController:vc animated:YES completion:nil];
-		
-		//[mvc dismissViewControllerAnimated:YES completion:nil];
 		
 		CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];

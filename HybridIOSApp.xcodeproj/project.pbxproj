@@ -31,18 +31,9 @@
 		30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30FC414816E50CA1004E6F35 /* icon-72@2x.png */; };
 		4A92D5B643054CE68555235F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ECC078829004BD0A338F3B2 /* libsqlite3.dylib */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
-		76059CD11C4B804B00EE3011 /* FRDLivelyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 76059CD01C4B804B00EE3011 /* FRDLivelyButton.m */; };
-		763B6CBD1C47533900752B77 /* UIControl+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 763B6CB81C47533900752B77 /* UIControl+YYAdd.m */; };
-		763B6CBE1C47533900752B77 /* UIGestureRecognizer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 763B6CBA1C47533900752B77 /* UIGestureRecognizer+YYAdd.m */; };
-		763B6CBF1C47533900752B77 /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 763B6CBC1C47533900752B77 /* UIView+YYAdd.m */; };
-		763B6CC21C4753F400752B77 /* CALayer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 763B6CC11C4753F400752B77 /* CALayer+YYAdd.m */; };
-		763D05D41C476F1C00120335 /* niconiconi@2x.gif_ in Resources */ = {isa = PBXBuildFile; fileRef = 763D05D31C476F1C00120335 /* niconiconi@2x.gif_ */; };
-		763D05D61C4771D300120335 /* niconiconi@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 763D05D51C4771D300120335 /* niconiconi@2x.gif */; };
-		764463D81C490BF700571245 /* MBCircularProgressBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463D51C490BF700571245 /* MBCircularProgressBarLayer.m */; };
-		764463D91C490BF700571245 /* MBCircularProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463D71C490BF700571245 /* MBCircularProgressBarView.m */; };
-		764463DC1C49159A00571245 /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 764463DB1C49159A00571245 /* CircleProgressBar.m */; };
-		765331971C4B93B4008FFD00 /* SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 765331961C4B93B4008FFD00 /* SHA1.m */; };
-		7653319A1C4B9514008FFD00 /* MessageDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = 765331991C4B9514008FFD00 /* MessageDigest.m */; };
+		763137361C5211810045A552 /* YYImageExampleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 763137351C5211810045A552 /* YYImageExampleHelper.m */; };
+		7631373A1C5269BC0045A552 /* DOFavoriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 763137391C5269BC0045A552 /* DOFavoriteButton.m */; };
+		7631373C1C526C880045A552 /* heart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7631373B1C526C880045A552 /* heart@2x.png */; };
 		7664582D1C4687D100DA581F /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 7664582C1C4687D100DA581F /* SQLitePlugin.m */; };
 		766458431C46884400DA581F /* YoikScreenOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 766458421C46884400DA581F /* YoikScreenOrientation.m */; };
 		766458461C46885000DA581F /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 766458451C46885000DA581F /* CDVFileTransfer.m */; };
@@ -57,10 +48,21 @@
 		766458611C4688A100DA581F /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 766458601C4688A100DA581F /* CDVDevice.m */; };
 		767A558A1C4755D300992D0F /* libYYWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 767A55891C4755D300992D0F /* libYYWebImage.a */; };
 		767A558C1C47572A00992D0F /* WebP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 767A558B1C47572A00992D0F /* WebP.framework */; };
-		76C2DC791C4764FD003E0642 /* YYImageDisplayExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C2DC761C4764FD003E0642 /* YYImageDisplayExample.m */; };
-		76C2DC7A1C4764FD003E0642 /* YYImageExampleHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C2DC781C4764FD003E0642 /* YYImageExampleHelper.m */; };
+		76AEA2031C4D190C0061A3FE /* HybridIOSApp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76AEA2021C4D190C0061A3FE /* HybridIOSApp-Info.plist */; };
+		76AEA2051C4D24A10061A3FE /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 76AEA2041C4D24A10061A3FE /* like.png */; };
+		76AEA2071C4D292B0061A3FE /* 1heart.png in Resources */ = {isa = PBXBuildFile; fileRef = 76AEA2061C4D292B0061A3FE /* 1heart.png */; };
+		76C2DC791C4764FD003E0642 /* ClipPlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C2DC761C4764FD003E0642 /* ClipPlayController.m */; };
+		76C485FE1C4E3F9E0008DCA3 /* CircleProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C485FB1C4E3F9E0008DCA3 /* CircleProgressBar.m */; };
+		76C485FF1C4E3F9E0008DCA3 /* SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C485FD1C4E3F9E0008DCA3 /* SHA1.m */; };
+		76C486021C4E3FF90008DCA3 /* MessageDigest.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C486011C4E3FF90008DCA3 /* MessageDigest.m */; };
+		76C486091C4E40780008DCA3 /* UIControl+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C486041C4E40780008DCA3 /* UIControl+YYAdd.m */; };
+		76C4860A1C4E40780008DCA3 /* UIGestureRecognizer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C486061C4E40780008DCA3 /* UIGestureRecognizer+YYAdd.m */; };
+		76C4860B1C4E40780008DCA3 /* UIView+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C486081C4E40780008DCA3 /* UIView+YYAdd.m */; };
+		76C486141C4E40AC0008DCA3 /* CALayer+YYAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C4860D1C4E40AC0008DCA3 /* CALayer+YYAdd.m */; };
+		76C486151C4E40AC0008DCA3 /* FRDLivelyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C4860F1C4E40AC0008DCA3 /* FRDLivelyButton.m */; };
+		76C486161C4E40AC0008DCA3 /* MBCircularProgressBarLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C486111C4E40AC0008DCA3 /* MBCircularProgressBarLayer.m */; };
+		76C486171C4E40AC0008DCA3 /* MBCircularProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C486131C4E40AC0008DCA3 /* MBCircularProgressBarView.m */; };
 		76C60E631C47309500F3FF78 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C60E621C47309500F3FF78 /* RootViewController.m */; };
-		76CDA1461C4774D90038B0EB /* YYWebImageExample.m in Sources */ = {isa = PBXBuildFile; fileRef = 76CDA1451C4774D90038B0EB /* YYWebImageExample.m */; };
 		7E7966DE1810823500FA85AD /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D41810823500FA85AD /* icon-40.png */; };
 		7E7966DF1810823500FA85AD /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D51810823500FA85AD /* icon-40@2x.png */; };
 		7E7966E01810823500FA85AD /* icon-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D61810823500FA85AD /* icon-50.png */; };
@@ -73,7 +75,6 @@
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		802110D71B3CE07D00E6B5F6 /* MyHybridPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 802110D61B3CE07D00E6B5F6 /* MyHybridPlugin.m */; };
 		8090B3D61B3CCD7B004F9219 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8090B3D51B3CCD7B004F9219 /* Main.storyboard */; };
-		8090B3DD1B3CDAEB004F9219 /* MyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8090B3DC1B3CDAEB004F9219 /* MyTableViewController.m */; };
 		81889E6D9D5F5374C9AB8F49 /* libPods-HybridIOSApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE342BFE5192F08352872FA9 /* libPods-HybridIOSApp.a */; };
 		8A88FA600567418E9CC06334 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF8B680D991549EB8F229D9F /* SystemConfiguration.framework */; };
 		9E300325C4F74EB7AE3CB472 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8501F447D22045F9A0CBEDDA /* WebKit.framework */; };
@@ -134,28 +135,11 @@
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		5ECC078829004BD0A338F3B2 /* libsqlite3.dylib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		6E9B3373DC2144CA8A47E7F1 /* CDVLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVLogger.h; path = "cordova-plugin-console/CDVLogger.h"; sourceTree = "<group>"; };
-		76059CCF1C4B804B00EE3011 /* FRDLivelyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDLivelyButton.h; path = "../../app file/FRDLivelyButton.h"; sourceTree = "<group>"; };
-		76059CD01C4B804B00EE3011 /* FRDLivelyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDLivelyButton.m; path = "../../app file/FRDLivelyButton.m"; sourceTree = "<group>"; };
-		763B6CB71C47533900752B77 /* UIControl+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIControl+YYAdd.h"; path = "../../app file/UIControl+YYAdd.h"; sourceTree = "<group>"; };
-		763B6CB81C47533900752B77 /* UIControl+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIControl+YYAdd.m"; path = "../../app file/UIControl+YYAdd.m"; sourceTree = "<group>"; };
-		763B6CB91C47533900752B77 /* UIGestureRecognizer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIGestureRecognizer+YYAdd.h"; path = "../../app file/UIGestureRecognizer+YYAdd.h"; sourceTree = "<group>"; };
-		763B6CBA1C47533900752B77 /* UIGestureRecognizer+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIGestureRecognizer+YYAdd.m"; path = "../../app file/UIGestureRecognizer+YYAdd.m"; sourceTree = "<group>"; };
-		763B6CBB1C47533900752B77 /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+YYAdd.h"; path = "../../app file/UIView+YYAdd.h"; sourceTree = "<group>"; };
-		763B6CBC1C47533900752B77 /* UIView+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+YYAdd.m"; path = "../../app file/UIView+YYAdd.m"; sourceTree = "<group>"; };
-		763B6CC01C4753F400752B77 /* CALayer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CALayer+YYAdd.h"; path = "../../app file/CALayer+YYAdd.h"; sourceTree = "<group>"; };
-		763B6CC11C4753F400752B77 /* CALayer+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+YYAdd.m"; path = "../../app file/CALayer+YYAdd.m"; sourceTree = "<group>"; };
-		763D05D31C476F1C00120335 /* niconiconi@2x.gif_ */ = {isa = PBXFileReference; lastKnownFileType = file; name = "niconiconi@2x.gif_"; path = "../../../../app file/niconiconi@2x.gif_"; sourceTree = "<group>"; };
-		763D05D51C4771D300120335 /* niconiconi@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "niconiconi@2x.gif"; path = "../../../../app file/niconiconi@2x.gif"; sourceTree = "<group>"; };
-		764463D41C490BF700571245 /* MBCircularProgressBarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBCircularProgressBarLayer.h; path = "../../app file/MBCircularProgressBarLayer.h"; sourceTree = "<group>"; };
-		764463D51C490BF700571245 /* MBCircularProgressBarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarLayer.m; path = "../../app file/MBCircularProgressBarLayer.m"; sourceTree = "<group>"; };
-		764463D61C490BF700571245 /* MBCircularProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBCircularProgressBarView.h; path = "../../app file/MBCircularProgressBarView.h"; sourceTree = "<group>"; };
-		764463D71C490BF700571245 /* MBCircularProgressBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarView.m; path = "../../app file/MBCircularProgressBarView.m"; sourceTree = "<group>"; };
-		764463DA1C49159A00571245 /* CircleProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleProgressBar.h; path = "../../app file/CircleProgressBar.h"; sourceTree = "<group>"; };
-		764463DB1C49159A00571245 /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleProgressBar.m; path = "../../app file/CircleProgressBar.m"; sourceTree = "<group>"; };
-		765331951C4B93B4008FFD00 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHA1.h; path = "../../app file/SHA1.h"; sourceTree = "<group>"; };
-		765331961C4B93B4008FFD00 /* SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHA1.m; path = "../../app file/SHA1.m"; sourceTree = "<group>"; };
-		765331981C4B9514008FFD00 /* MessageDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageDigest.h; path = "../../app file/MessageDigest.h"; sourceTree = "<group>"; };
-		765331991C4B9514008FFD00 /* MessageDigest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageDigest.m; path = "../../app file/MessageDigest.m"; sourceTree = "<group>"; };
+		763137341C5211810045A552 /* YYImageExampleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YYImageExampleHelper.h; path = HybridIOSApp/Classes/YYImageExampleHelper.h; sourceTree = "<group>"; };
+		763137351C5211810045A552 /* YYImageExampleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YYImageExampleHelper.m; path = HybridIOSApp/Classes/YYImageExampleHelper.m; sourceTree = "<group>"; };
+		763137381C5269BC0045A552 /* DOFavoriteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DOFavoriteButton.h; path = HybridIOSApp/Classes/DOFavoriteButton.h; sourceTree = "<group>"; };
+		763137391C5269BC0045A552 /* DOFavoriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DOFavoriteButton.m; path = HybridIOSApp/Classes/DOFavoriteButton.m; sourceTree = "<group>"; };
+		7631373B1C526C880045A552 /* heart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "heart@2x.png"; sourceTree = "<group>"; };
 		7664582B1C4687D100DA581F /* SQLitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLitePlugin.h; path = com.phonegap.plugins.sqlite/SQLitePlugin.h; sourceTree = "<group>"; };
 		7664582C1C4687D100DA581F /* SQLitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLitePlugin.m; path = com.phonegap.plugins.sqlite/SQLitePlugin.m; sourceTree = "<group>"; };
 		766458411C46884400DA581F /* YoikScreenOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YoikScreenOrientation.h; path = "cordova-plugin-screen-orientation/YoikScreenOrientation.h"; sourceTree = "<group>"; };
@@ -182,14 +166,33 @@
 		766458601C4688A100DA581F /* CDVDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
 		767A55891C4755D300992D0F /* libYYWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libYYWebImage.a; path = "Pods/../build/Debug-iphoneos/libYYWebImage.a"; sourceTree = "<group>"; };
 		767A558B1C47572A00992D0F /* WebP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebP.framework; path = Pods/YYWebImage/Vendor/WebP.framework; sourceTree = "<group>"; };
-		76C2DC751C4764FD003E0642 /* YYImageDisplayExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageDisplayExample.h; sourceTree = "<group>"; };
-		76C2DC761C4764FD003E0642 /* YYImageDisplayExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageDisplayExample.m; sourceTree = "<group>"; };
-		76C2DC771C4764FD003E0642 /* YYImageExampleHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageExampleHelper.h; sourceTree = "<group>"; };
-		76C2DC781C4764FD003E0642 /* YYImageExampleHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageExampleHelper.m; sourceTree = "<group>"; };
+		76AEA2021C4D190C0061A3FE /* HybridIOSApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HybridIOSApp-Info.plist"; sourceTree = "<group>"; };
+		76AEA2041C4D24A10061A3FE /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		76AEA2061C4D292B0061A3FE /* 1heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1heart.png; sourceTree = "<group>"; };
+		76C2DC751C4764FD003E0642 /* ClipPlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipPlayController.h; sourceTree = "<group>"; };
+		76C2DC761C4764FD003E0642 /* ClipPlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipPlayController.m; sourceTree = "<group>"; };
+		76C485FA1C4E3F9E0008DCA3 /* CircleProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleProgressBar.h; path = HybridIOSApp/Classes/CircleProgressBar.h; sourceTree = "<group>"; };
+		76C485FB1C4E3F9E0008DCA3 /* CircleProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleProgressBar.m; path = HybridIOSApp/Classes/CircleProgressBar.m; sourceTree = "<group>"; };
+		76C485FC1C4E3F9E0008DCA3 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SHA1.h; path = HybridIOSApp/Classes/SHA1.h; sourceTree = "<group>"; };
+		76C485FD1C4E3F9E0008DCA3 /* SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SHA1.m; path = HybridIOSApp/Classes/SHA1.m; sourceTree = "<group>"; };
+		76C486001C4E3FF90008DCA3 /* MessageDigest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageDigest.h; path = HybridIOSApp/Classes/MessageDigest.h; sourceTree = "<group>"; };
+		76C486011C4E3FF90008DCA3 /* MessageDigest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageDigest.m; path = HybridIOSApp/Classes/MessageDigest.m; sourceTree = "<group>"; };
+		76C486031C4E40780008DCA3 /* UIControl+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIControl+YYAdd.h"; path = "HybridIOSApp/Classes/UIControl+YYAdd.h"; sourceTree = "<group>"; };
+		76C486041C4E40780008DCA3 /* UIControl+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIControl+YYAdd.m"; path = "HybridIOSApp/Classes/UIControl+YYAdd.m"; sourceTree = "<group>"; };
+		76C486051C4E40780008DCA3 /* UIGestureRecognizer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIGestureRecognizer+YYAdd.h"; path = "HybridIOSApp/Classes/UIGestureRecognizer+YYAdd.h"; sourceTree = "<group>"; };
+		76C486061C4E40780008DCA3 /* UIGestureRecognizer+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIGestureRecognizer+YYAdd.m"; path = "HybridIOSApp/Classes/UIGestureRecognizer+YYAdd.m"; sourceTree = "<group>"; };
+		76C486071C4E40780008DCA3 /* UIView+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+YYAdd.h"; path = "HybridIOSApp/Classes/UIView+YYAdd.h"; sourceTree = "<group>"; };
+		76C486081C4E40780008DCA3 /* UIView+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+YYAdd.m"; path = "HybridIOSApp/Classes/UIView+YYAdd.m"; sourceTree = "<group>"; };
+		76C4860C1C4E40AC0008DCA3 /* CALayer+YYAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CALayer+YYAdd.h"; path = "HybridIOSApp/Classes/CALayer+YYAdd.h"; sourceTree = "<group>"; };
+		76C4860D1C4E40AC0008DCA3 /* CALayer+YYAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CALayer+YYAdd.m"; path = "HybridIOSApp/Classes/CALayer+YYAdd.m"; sourceTree = "<group>"; };
+		76C4860E1C4E40AC0008DCA3 /* FRDLivelyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FRDLivelyButton.h; path = HybridIOSApp/Classes/FRDLivelyButton.h; sourceTree = "<group>"; };
+		76C4860F1C4E40AC0008DCA3 /* FRDLivelyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FRDLivelyButton.m; path = HybridIOSApp/Classes/FRDLivelyButton.m; sourceTree = "<group>"; };
+		76C486101C4E40AC0008DCA3 /* MBCircularProgressBarLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBCircularProgressBarLayer.h; path = HybridIOSApp/Classes/MBCircularProgressBarLayer.h; sourceTree = "<group>"; };
+		76C486111C4E40AC0008DCA3 /* MBCircularProgressBarLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarLayer.m; path = HybridIOSApp/Classes/MBCircularProgressBarLayer.m; sourceTree = "<group>"; };
+		76C486121C4E40AC0008DCA3 /* MBCircularProgressBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBCircularProgressBarView.h; path = HybridIOSApp/Classes/MBCircularProgressBarView.h; sourceTree = "<group>"; };
+		76C486131C4E40AC0008DCA3 /* MBCircularProgressBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBCircularProgressBarView.m; path = HybridIOSApp/Classes/MBCircularProgressBarView.m; sourceTree = "<group>"; };
 		76C60E611C47303100F3FF78 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		76C60E621C47309500F3FF78 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		76CDA1441C4774D90038B0EB /* YYWebImageExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYWebImageExample.h; sourceTree = "<group>"; };
-		76CDA1451C4774D90038B0EB /* YYWebImageExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYWebImageExample.m; sourceTree = "<group>"; };
 		7E7966D41810823500FA85AD /* icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40.png"; sourceTree = "<group>"; };
 		7E7966D51810823500FA85AD /* icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40@2x.png"; sourceTree = "<group>"; };
 		7E7966D61810823500FA85AD /* icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-50.png"; sourceTree = "<group>"; };
@@ -203,10 +206,7 @@
 		802110D51B3CE07D00E6B5F6 /* MyHybridPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHybridPlugin.h; sourceTree = "<group>"; };
 		802110D61B3CE07D00E6B5F6 /* MyHybridPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHybridPlugin.m; sourceTree = "<group>"; };
 		8090B3D51B3CCD7B004F9219 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		8090B3DB1B3CDAEB004F9219 /* MyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTableViewController.h; sourceTree = "<group>"; };
-		8090B3DC1B3CDAEB004F9219 /* MyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewController.m; sourceTree = "<group>"; };
 		8501F447D22045F9A0CBEDDA /* WebKit.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		8D1107310486CEB800E47090 /* HybridIOSApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "HybridIOSApp-Info.plist"; path = "../HybridIOSApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		AF8B680D991549EB8F229D9F /* SystemConfiguration.framework */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CE342BFE5192F08352872FA9 /* libPods-HybridIOSApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HybridIOSApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
@@ -239,20 +239,14 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				76CDA1441C4774D90038B0EB /* YYWebImageExample.h */,
-				76CDA1451C4774D90038B0EB /* YYWebImageExample.m */,
-				76C2DC751C4764FD003E0642 /* YYImageDisplayExample.h */,
-				76C2DC761C4764FD003E0642 /* YYImageDisplayExample.m */,
-				76C2DC771C4764FD003E0642 /* YYImageExampleHelper.h */,
-				76C2DC781C4764FD003E0642 /* YYImageExampleHelper.m */,
+				76C2DC751C4764FD003E0642 /* ClipPlayController.h */,
+				76C2DC761C4764FD003E0642 /* ClipPlayController.m */,
 				302D95EE14D2391D003F00A1 /* MainViewController.h */,
 				302D95EF14D2391D003F00A1 /* MainViewController.m */,
 				302D95F014D2391D003F00A1 /* MainViewController.xib */,
 				1D3623240D0F684500981E51 /* AppDelegate.h */,
 				1D3623250D0F684500981E51 /* AppDelegate.m */,
 				8090B3D51B3CCD7B004F9219 /* Main.storyboard */,
-				8090B3DB1B3CDAEB004F9219 /* MyTableViewController.h */,
-				8090B3DC1B3CDAEB004F9219 /* MyTableViewController.m */,
 				802110D51B3CE07D00E6B5F6 /* MyHybridPlugin.h */,
 				802110D61B3CE07D00E6B5F6 /* MyHybridPlugin.m */,
 				76C60E611C47303100F3FF78 /* RootViewController.h */,
@@ -301,11 +295,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				763D05D51C4771D300120335 /* niconiconi@2x.gif */,
-				763D05D31C476F1C00120335 /* niconiconi@2x.gif_ */,
+				7631373B1C526C880045A552 /* heart@2x.png */,
+				76AEA2061C4D292B0061A3FE /* 1heart.png */,
+				76AEA2041C4D24A10061A3FE /* like.png */,
+				76AEA2021C4D190C0061A3FE /* HybridIOSApp-Info.plist */,
 				308D052D1370CCF300D202BF /* icons */,
 				308D05311370CCF300D202BF /* splash */,
-				8D1107310486CEB800E47090 /* HybridIOSApp-Info.plist */,
 			);
 			name = Resources;
 			path = HybridIOSApp/Resources;
@@ -422,26 +417,30 @@
 		763B6CB61C4752D800752B77 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				765331981C4B9514008FFD00 /* MessageDigest.h */,
-				765331991C4B9514008FFD00 /* MessageDigest.m */,
-				765331951C4B93B4008FFD00 /* SHA1.h */,
-				765331961C4B93B4008FFD00 /* SHA1.m */,
-				76059CCF1C4B804B00EE3011 /* FRDLivelyButton.h */,
-				76059CD01C4B804B00EE3011 /* FRDLivelyButton.m */,
-				764463DA1C49159A00571245 /* CircleProgressBar.h */,
-				764463DB1C49159A00571245 /* CircleProgressBar.m */,
-				764463D41C490BF700571245 /* MBCircularProgressBarLayer.h */,
-				764463D51C490BF700571245 /* MBCircularProgressBarLayer.m */,
-				764463D61C490BF700571245 /* MBCircularProgressBarView.h */,
-				764463D71C490BF700571245 /* MBCircularProgressBarView.m */,
-				763B6CC01C4753F400752B77 /* CALayer+YYAdd.h */,
-				763B6CC11C4753F400752B77 /* CALayer+YYAdd.m */,
-				763B6CB71C47533900752B77 /* UIControl+YYAdd.h */,
-				763B6CB81C47533900752B77 /* UIControl+YYAdd.m */,
-				763B6CB91C47533900752B77 /* UIGestureRecognizer+YYAdd.h */,
-				763B6CBA1C47533900752B77 /* UIGestureRecognizer+YYAdd.m */,
-				763B6CBB1C47533900752B77 /* UIView+YYAdd.h */,
-				763B6CBC1C47533900752B77 /* UIView+YYAdd.m */,
+				763137381C5269BC0045A552 /* DOFavoriteButton.h */,
+				763137391C5269BC0045A552 /* DOFavoriteButton.m */,
+				763137341C5211810045A552 /* YYImageExampleHelper.h */,
+				763137351C5211810045A552 /* YYImageExampleHelper.m */,
+				76C4860C1C4E40AC0008DCA3 /* CALayer+YYAdd.h */,
+				76C4860D1C4E40AC0008DCA3 /* CALayer+YYAdd.m */,
+				76C4860E1C4E40AC0008DCA3 /* FRDLivelyButton.h */,
+				76C4860F1C4E40AC0008DCA3 /* FRDLivelyButton.m */,
+				76C486101C4E40AC0008DCA3 /* MBCircularProgressBarLayer.h */,
+				76C486111C4E40AC0008DCA3 /* MBCircularProgressBarLayer.m */,
+				76C486121C4E40AC0008DCA3 /* MBCircularProgressBarView.h */,
+				76C486131C4E40AC0008DCA3 /* MBCircularProgressBarView.m */,
+				76C486031C4E40780008DCA3 /* UIControl+YYAdd.h */,
+				76C486041C4E40780008DCA3 /* UIControl+YYAdd.m */,
+				76C486051C4E40780008DCA3 /* UIGestureRecognizer+YYAdd.h */,
+				76C486061C4E40780008DCA3 /* UIGestureRecognizer+YYAdd.m */,
+				76C486071C4E40780008DCA3 /* UIView+YYAdd.h */,
+				76C486081C4E40780008DCA3 /* UIView+YYAdd.m */,
+				76C486001C4E3FF90008DCA3 /* MessageDigest.h */,
+				76C486011C4E3FF90008DCA3 /* MessageDigest.m */,
+				76C485FA1C4E3F9E0008DCA3 /* CircleProgressBar.h */,
+				76C485FB1C4E3F9E0008DCA3 /* CircleProgressBar.m */,
+				76C485FC1C4E3F9E0008DCA3 /* SHA1.h */,
+				76C485FD1C4E3F9E0008DCA3 /* SHA1.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -478,6 +477,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 710;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = NFXT343F5P;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "HybridIOSApp" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -525,14 +529,15 @@
 			files = (
 				7E7966E41810823500FA85AD /* icon-76.png in Resources */,
 				7E7966DF1810823500FA85AD /* icon-40@2x.png in Resources */,
-				763D05D61C4771D300120335 /* niconiconi@2x.gif in Resources */,
 				308D05371370CCF300D202BF /* icon-72.png in Resources */,
 				30B4F30819D5E08600D9F7D8 /* Default-736h.png in Resources */,
+				76AEA2031C4D190C0061A3FE /* HybridIOSApp-Info.plist in Resources */,
 				308D05381370CCF300D202BF /* icon.png in Resources */,
 				308D05391370CCF300D202BF /* icon@2x.png in Resources */,
 				8090B3D61B3CCD7B004F9219 /* Main.storyboard in Resources */,
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
 				7E7966E01810823500FA85AD /* icon-50.png in Resources */,
+				7631373C1C526C880045A552 /* heart@2x.png in Resources */,
 				7E7966E31810823500FA85AD /* icon-60@2x.png in Resources */,
 				7E7966E61810823500FA85AD /* icon-small.png in Resources */,
 				3088BBBD154F3926009F9C59 /* Default-Landscape@2x~ipad.png in Resources */,
@@ -540,11 +545,12 @@
 				3088BBBF154F3926009F9C59 /* Default-Portrait@2x~ipad.png in Resources */,
 				7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */,
 				3088BBC0154F3926009F9C59 /* Default-Portrait~ipad.png in Resources */,
+				76AEA2051C4D24A10061A3FE /* like.png in Resources */,
 				30B4F30719D5E08600D9F7D8 /* Default-667h.png in Resources */,
 				7E7966DE1810823500FA85AD /* icon-40.png in Resources */,
 				3088BBC1154F3926009F9C59 /* Default@2x~iphone.png in Resources */,
 				7E7966E21810823500FA85AD /* icon-60.png in Resources */,
-				763D05D41C476F1C00120335 /* niconiconi@2x.gif_ in Resources */,
+				76AEA2071C4D292B0061A3FE /* 1heart.png in Resources */,
 				3088BBC2154F3926009F9C59 /* Default~iphone.png in Resources */,
 				D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */,
 				30B4F30919D5E08600D9F7D8 /* Default-Landscape-736h.png in Resources */,
@@ -625,38 +631,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				764463DC1C49159A00571245 /* CircleProgressBar.m in Sources */,
-				765331971C4B93B4008FFD00 /* SHA1.m in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				7631373A1C5269BC0045A552 /* DOFavoriteButton.m in Sources */,
 				7664585D1C46888C00DA581F /* IonicKeyboard.m in Sources */,
 				766458611C4688A100DA581F /* CDVDevice.m in Sources */,
-				763B6CBD1C47533900752B77 /* UIControl+YYAdd.m in Sources */,
-				764463D81C490BF700571245 /* MBCircularProgressBarLayer.m in Sources */,
 				7664584F1C46885E00DA581F /* CDVLocalFilesystem.m in Sources */,
 				7664584E1C46885E00DA581F /* CDVFile.m in Sources */,
-				764463D91C490BF700571245 /* MBCircularProgressBarView.m in Sources */,
-				8090B3DD1B3CDAEB004F9219 /* MyTableViewController.m in Sources */,
+				76C485FF1C4E3F9E0008DCA3 /* SHA1.m in Sources */,
+				76C486141C4E40AC0008DCA3 /* CALayer+YYAdd.m in Sources */,
 				7664584D1C46885E00DA581F /* CDVAssetLibraryFilesystem.m in Sources */,
+				76C4860B1C4E40780008DCA3 /* UIView+YYAdd.m in Sources */,
 				766458551C46886F00DA581F /* CDVViewController+SplashScreen.m in Sources */,
-				76C2DC791C4764FD003E0642 /* YYImageDisplayExample.m in Sources */,
+				76C2DC791C4764FD003E0642 /* ClipPlayController.m in Sources */,
 				76C60E631C47309500F3FF78 /* RootViewController.m in Sources */,
-				7653319A1C4B9514008FFD00 /* MessageDigest.m in Sources */,
 				802110D71B3CE07D00E6B5F6 /* MyHybridPlugin.m in Sources */,
 				766458581C46888000DA581F /* CDVStatusBar.m in Sources */,
-				76C2DC7A1C4764FD003E0642 /* YYImageExampleHelper.m in Sources */,
 				766458541C46886F00DA581F /* CDVSplashScreen.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				7664582D1C4687D100DA581F /* SQLitePlugin.m in Sources */,
+				763137361C5211810045A552 /* YYImageExampleHelper.m in Sources */,
+				76C4860A1C4E40780008DCA3 /* UIGestureRecognizer+YYAdd.m in Sources */,
 				766458431C46884400DA581F /* YoikScreenOrientation.m in Sources */,
+				76C486021C4E3FF90008DCA3 /* MessageDigest.m in Sources */,
 				766458461C46885000DA581F /* CDVFileTransfer.m in Sources */,
-				763B6CC21C4753F400752B77 /* CALayer+YYAdd.m in Sources */,
-				76059CD11C4B804B00EE3011 /* FRDLivelyButton.m in Sources */,
+				76C486151C4E40AC0008DCA3 /* FRDLivelyButton.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				ED380035D91647E293A5C7AE /* CDVLogger.m in Sources */,
-				763B6CBF1C47533900752B77 /* UIView+YYAdd.m in Sources */,
-				76CDA1461C4774D90038B0EB /* YYWebImageExample.m in Sources */,
+				76C485FE1C4E3F9E0008DCA3 /* CircleProgressBar.m in Sources */,
 				7664585E1C46888C00DA581F /* UIWebViewExtension.m in Sources */,
-				763B6CBE1C47533900752B77 /* UIGestureRecognizer+YYAdd.m in Sources */,
+				76C486091C4E40780008DCA3 /* UIControl+YYAdd.m in Sources */,
+				76C486161C4E40AC0008DCA3 /* MBCircularProgressBarLayer.m in Sources */,
+				76C486171C4E40AC0008DCA3 /* MBCircularProgressBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +683,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -703,6 +710,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = org.sample.hybridiosapp;
 				PRODUCT_NAME = HybridIOSApp;
+				PROVISIONING_PROFILE = "";
 				"SDKROOT[arch=*]" = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -715,6 +723,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -738,6 +748,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = org.sample.hybridiosapp;
 				PRODUCT_NAME = HybridIOSApp;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

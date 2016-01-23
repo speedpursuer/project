@@ -131,7 +131,8 @@
               destroy: qify(db.destroy.bind(db)),
               createIndex: qify(db.createIndex.bind(db)),
               find: qify(db.find.bind(db)),
-              on: qify(db.on.bind(db))
+              on: qify(db.on.bind(db)),
+              viewCleanup: qify(db.viewCleanup.bind(db)),
             };
           }
         };

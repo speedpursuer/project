@@ -7,7 +7,6 @@
 //
 
 #import "RootViewController.h"
-//#import "YYImageExample.h"
 #import "MainViewController.h"
 
 @interface RootViewController ()
@@ -18,8 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    YYImageExample *vc = [YYImageExample new];
-//    [self pushViewController:vc animated:NO];
 	
     MainViewController *vc = [MainViewController new];
 	[self.interactivePopGestureRecognizer setEnabled:NO];
