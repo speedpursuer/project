@@ -27,6 +27,8 @@
 	UIImage *likeImamge;
 	UIImage *notLikeImage;
 	BOOL loaded;
+	BOOL iniFavorite;
+	BOOL download;
 }
 
 - (void)viewDidLoad {
@@ -45,6 +47,8 @@
 	imageView = [YYAnimatedImageView new];
 	
 	loaded = false;
+	
+	download = false;
 	
 //	imageView.height = self.view.size.height - self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
 
@@ -103,7 +107,9 @@
 			
 			[UIImageJPEGRepresentation(image1, 0.8f) writeToFile:filePath atomically:YES];
 			
-			[self performSelectorOnMainThread:@selector(updateClip) withObject:nil waitUntilDone:NO];
+			download = true;
+			
+			//[self performSelectorOnMainThread:@selector(updateClip) withObject:nil waitUntilDone:NO];
 			
 			return image;
 		}
@@ -132,6 +138,8 @@
 
 - (void) initButtons {
 	
+	iniFavorite = self.favorite;
+	
 	FRDLivelyButton *closeButton = [[FRDLivelyButton alloc] initWithFrame:CGRectMake(0,[UIApplication sharedApplication].statusBarFrame.size.height+6,36,28)];
 	[closeButton setStyle:kFRDLivelyButtonStyleClose animated:NO];
 	[closeButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
@@ -142,11 +150,10 @@
 	if (self.showLike) {
 		
 		DOFavoriteButton *heartButton = [[DOFavoriteButton alloc] initWithFrame:CGRectMake(self.view.size.width - 44,[UIApplication sharedApplication].statusBarFrame.size.height, 44, 44) image:[UIImage imageNamed:@"heart"]];
-		heartButton.imageColorOn = [UIColor colorWithRed:254.0 / 255.0 green:110.0 / 255.0 blue:111.0 / 255.0 alpha:1.0];
-		heartButton.circleColor = [UIColor colorWithRed:254.0 / 255.0 green:110.0 / 255.0 blue:111.0 / 255.0 alpha:1.0];
-		heartButton.lineColor = [UIColor colorWithRed:226.0 / 255.0 green:96.0 / 255.0 blue:96.0 / 255.0 alpha:1.0];
+		heartButton.imageColorOn = [UIColor colorWithRed:56.0 / 255.0 green:126.0 / 255.0 blue:245.0 / 255.0 alpha:1.0];
+		heartButton.circleColor = [UIColor colorWithRed:56.0 / 255.0 green:126.0 / 255.0 blue:245.0 / 255.0 alpha:1.0];
+		heartButton.lineColor = [UIColor colorWithRed:40.0 / 255.0 green:120.0 / 255.0 blue:240.0 / 255.0 alpha:1.0];
 		[heartButton addTarget:self action:@selector(tappedButton:) forControlEvents:UIControlEventTouchUpInside];
-		
 		
 		if(self.favorite) [heartButton select];
 		[self.view addSubview:heartButton];
@@ -171,28 +178,43 @@
 }
 
 - (void)tappedButton:(DOFavoriteButton *)sender {
+	self.favorite = !sender.selected;
 	if (sender.selected) {
 		[sender deselect];
 	} else {
 		[sender select];
 	}
-	[self callJSFunction:@"updateClipFavorite();"];
+	//[self callJSFunction:@"updateClipFavorite();"];
 }
 
 - (void)cancelAction{
 	[imageView yy_cancelCurrentImageRequest];
+	
+	[self emitActionToJS];
+	
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)callJSFunction: (NSString*) fun {
-	MainViewController* a = (MainViewController*)self.delegate;
-	[a.webView stringByEvaluatingJavaScriptFromString:fun];
+	[self.delegate.webView stringByEvaluatingJavaScriptFromString:fun];
 }
-
 
 - (void)showProgress{
 	if (!loaded) {
 		_progressBar.hidden = NO;
+	}
+}
+
+- (void)emitActionToJS{
+	
+	if (download) {
+		if (iniFavorite != self.favorite) {
+			[self callJSFunction:@"updateClipBoth();"];
+		} else {
+			[self updateClip];
+		}
+	} else if (iniFavorite != self.favorite) {
+		[self callJSFunction:@"updateClipFavorite();"];
 	}
 }
 /*

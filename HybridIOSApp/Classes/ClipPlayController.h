@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainViewController.h"
 
 @interface ClipPlayController : UIViewController
 @property (nonatomic, strong) NSString *clipURL;
 @property (nonatomic, assign) BOOL favorite;
 @property (nonatomic, assign) BOOL showLike;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) MainViewController *delegate;
 - (void) cancelAction;
 @end

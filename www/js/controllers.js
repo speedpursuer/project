@@ -45,6 +45,10 @@ angular.module('app.controllers', [])
 		//clipList[index].favorite = !flag;
 	};
 
+	$scope.updateBothFromNative = function() {
+		DBService.updateBoth(clipList[$scope.playingClipIndex]._id, !clipList[$scope.playingClipIndex].favorite, clipList);
+	};
+
 	//$scope.play = function(index) {	
 	$scope.updateThumbFromNative = function() {		
 		//$scope.playingClipIndex = index;	
@@ -81,11 +85,12 @@ angular.module('app.controllers', [])
 		setFavorite(index);
 	};
 	
+	/*
 	$scope.updateFavoriteFromNative = function() {
 		if($scope.playingClipIndex !== "") {
 			setFavorite($scope.playingClipIndex);
 		}
-	};
+	};*/
 
 	$scope.updateThumbFromNative = function() {		
 		if($scope.playingClipIndex !== "") {

@@ -32,3 +32,8 @@ function updateClipFavorite(){
     var scope = angular.element(document.getElementById('ClipsScopeID')).scope();
     scope.updateFavoriteFromNative();
 }
+
+function updateClipBoth(){
+    var scope = angular.element(document.getElementById('ClipsScopeID')).scope();
+    scope.updateBothFromNative();
+}

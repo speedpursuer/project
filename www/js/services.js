@@ -9,6 +9,7 @@ angular.module('app.services', [])
     //var dbName = "ballroad", remoteURL = "http://admin:12341234@localhost:5984/";
 
     var db = pouchdb.create(dbName, {adapter: 'websql'});//, remoteDB = pouchdb.create(remoteURL + dbName);
+    //var db = pouchdb.create(dbName);//, remoteDB = pouchdb.create(remoteURL + dbName);
 
     //deleteDB();
     //syncTo();        
@@ -85,7 +86,7 @@ angular.module('app.services', [])
 	service.getFavoriteList = function(){
 	    return favoriteList;
 	};	
-	service.addFavorite = function(clipID) {
+	service.addFavorite = function(clipID, thumb) {
 
         for(var i=0;i<favoriteList.length;i++) {
             if(favoriteList[i]._id == clipID) {                
@@ -93,6 +94,12 @@ angular.module('app.services', [])
             }
         }
 
+        service.getDoc(clipID).then(function(result){
+            if(thumb) result.thumb = thumb;
+            result.favorite = true;
+            favoriteList.push(result);
+        });
+        /*
         db.query('views/local', {include_docs : true, key: clipID}).then(function (result) {
                                                
             result = result.rows.map(function(row) {
@@ -117,16 +124,13 @@ angular.module('app.services', [])
         }).catch(function (err) {                
             deferred.reject(err);                
         });
-        /*
-		service.getDoc(clipID).then(function(result){
-    		favoriteList.push(result);
-    	});*/
+        */       
     };
 	service.removeFavorite = function(clipID) {	    	
     	for(var i=0;i<favoriteList.length;i++) {
     		if(favoriteList[i]._id == clipID) {
     			favoriteList.splice(i,1);
-    			return true;
+    			return;
     		}
     	}
     };
@@ -443,11 +447,58 @@ angular.module('app.services', [])
         });
         return deferred.promise;
     };
+
+    service.updateBoth = function(clipID, favorite, curClipList) {
+
+        var post_fix = ".jpg";
+
+        var updateList = function(list) {
+            if(list && list.length > 0) {
+                for(i in list) {
+                    if(list[i]._id == clipID) {                
+                        list[i].thumb = list[i].image + post_fix;
+                        list[i].favorite = favorite;
+                        return;
+                    }
+                }        
+            }            
+        };
+
+        db.get(clipID).then(function(clip) {
+            db.get(clip.local).then(function(local) {
+                local.thumb = clip.image + post_fix;
+                local.favorite = favorite;
+                db.put(local);
+            }).catch(function(){
+                var local = {
+                    _id: clip.local,
+                    type: "local",
+                    favorite: favorite,
+                    thumb: clip.image + post_fix,
+                    clip: clipID            
+                }
+                db.put(local);
+            });  
+
+            if(favorite) {
+                service.addFavorite(clipID, clip.image + post_fix);
+            } else {
+                service.removeFavorite(clipID);
+            }                                  
+        });
+
+        updateList(curClipList);        
+    };
     
     service.updateFavorite = function(clipID, localID, flag) {        
         db.get(localID).then(function(local) {
             local.favorite = flag;
-            db.put(local);            
+            db.put(local);      
+            if(flag) {
+                service.addFavorite(clipID, local.thumb);
+            } else {
+                service.removeFavorite(clipID);
+            }          
         }).catch(function(){
             var local = {
                 _id: localID,
@@ -457,12 +508,8 @@ angular.module('app.services', [])
                 clip: clipID               
             }
             db.put(local);
-        });
-        if(flag) {
-            service.addFavorite(clipID);
-        } else {
-            service.removeFavorite(clipID);
-        }       
+            service.addFavorite(clipID, "");
+        });        
     };
 
     service.updateThumb = function(clipID, curClipList) {
@@ -494,12 +541,11 @@ angular.module('app.services', [])
                     clip: clipID            
                 }
                 db.put(local);
-            });
+            });         
+        });    
 
-            updateList(favoriteList);
-            updateList(curClipList);
-                     
-        });                
+        updateList(favoriteList);
+        updateList(curClipList);            
     };
 
     function deleteDB() {      
