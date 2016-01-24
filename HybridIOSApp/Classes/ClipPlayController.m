@@ -24,11 +24,10 @@
 @end
 @implementation ClipPlayController {
 	YYAnimatedImageView *imageView;
-	UIImage *likeImamge;
-	UIImage *notLikeImage;
 	BOOL loaded;
 	BOOL iniFavorite;
-	BOOL download;
+	//UIImage *likeImamge;
+	//UIImage *notLikeImage;
 }
 
 - (void)viewDidLoad {
@@ -47,8 +46,6 @@
 	imageView = [YYAnimatedImageView new];
 	
 	loaded = false;
-	
-	download = false;
 	
 //	imageView.height = self.view.size.height - self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
 
@@ -107,7 +104,7 @@
 			
 			[UIImageJPEGRepresentation(image1, 0.8f) writeToFile:filePath atomically:YES];
 			
-			download = true;
+			//download = true;
 			
 			//[self performSelectorOnMainThread:@selector(updateClip) withObject:nil waitUntilDone:NO];
 			
@@ -150,9 +147,16 @@
 	if (self.showLike) {
 		
 		DOFavoriteButton *heartButton = [[DOFavoriteButton alloc] initWithFrame:CGRectMake(self.view.size.width - 44,[UIApplication sharedApplication].statusBarFrame.size.height, 44, 44) image:[UIImage imageNamed:@"heart"]];
+		
+		/*
 		heartButton.imageColorOn = [UIColor colorWithRed:56.0 / 255.0 green:126.0 / 255.0 blue:245.0 / 255.0 alpha:1.0];
 		heartButton.circleColor = [UIColor colorWithRed:56.0 / 255.0 green:126.0 / 255.0 blue:245.0 / 255.0 alpha:1.0];
 		heartButton.lineColor = [UIColor colorWithRed:40.0 / 255.0 green:120.0 / 255.0 blue:240.0 / 255.0 alpha:1.0];
+		*/
+		heartButton.imageColorOn = [UIColor colorWithRed:51.0 / 255.0 green:205.0 / 255.0 blue:95.0 / 255.0 alpha:1.0];
+		heartButton.circleColor = [UIColor colorWithRed:51.0 / 255.0 green:205.0 / 255.0 blue:95.0 / 255.0 alpha:1.0];
+		heartButton.lineColor = [UIColor colorWithRed:40.0 / 255.0 green:195.0 / 255.0 blue:85.0 / 255.0 alpha:1.0];
+		
 		[heartButton addTarget:self action:@selector(tappedButton:) forControlEvents:UIControlEventTouchUpInside];
 		
 		if(self.favorite) [heartButton select];
@@ -207,7 +211,7 @@
 
 - (void)emitActionToJS{
 	
-	if (download) {
+	if (loaded) {
 		if (iniFavorite != self.favorite) {
 			[self callJSFunction:@"updateClipBoth();"];
 		} else {

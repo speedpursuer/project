@@ -1,13 +1,13 @@
 angular.module('app.controllers', [])
 
-.controller('PlayerCtrl', function($scope, $ionicSlideBoxDelegate, $state, DBService, ErrorService, players) {
+.controller('StarsCtrl', function($scope, $ionicSlideBoxDelegate, $state, DBService, ErrorService, stars) {
   	
 	(function() {
-		renderPlayList(players);
+		renderPlayList(stars);
 	}());	  
 
  	function renderPlayList(results) {
- 		$scope.players = results.docs;
+ 		$scope.stars = results.docs;
 			$ionicSlideBoxDelegate.update();
 			$ionicSlideBoxDelegate.slide(0);
 			ErrorService.hideSplashScreen();
@@ -34,27 +34,27 @@ angular.module('app.controllers', [])
 		AnimationService.playAnimation(clipList[index].image, clipList[index].favorite, true);
 	};
 
-	$scope.updateFavoriteFromNative = function() {
-		setFavorite($scope.playingClipIndex);
-	};
-	
 	$scope.updateFavorite = function(index) {
 		$ionicListDelegate.closeOptionButtons();
 		setFavorite(index);
-		//DBService.updateFavorite(clipList[index]._id, clipList[index].local, !flag);
-		//clipList[index].favorite = !flag;
+	};
+
+	$scope.updateFavoriteFromNative = function() {
+		setFavorite($scope.playingClipIndex);
+	};
+
+	$scope.updateThumbFromNative = function() {
+		if(clipList[$scope.playingClipIndex].thumb === "") {
+			DBService.updateThumb(clipList[$scope.playingClipIndex]._id, clipList);			
+		}
 	};
 
 	$scope.updateBothFromNative = function() {
-		DBService.updateBoth(clipList[$scope.playingClipIndex]._id, !clipList[$scope.playingClipIndex].favorite, clipList);
-	};
-
-	//$scope.play = function(index) {	
-	$scope.updateThumbFromNative = function() {		
-		//$scope.playingClipIndex = index;	
-		if($scope.playingClipIndex !== "") {
-			DBService.updateThumb(clipList[$scope.playingClipIndex]._id, clipList);			
-		}
+		if(clipList[$scope.playingClipIndex].thumb === "") {
+			DBService.updateBoth(clipList[$scope.playingClipIndex]._id, !clipList[$scope.playingClipIndex].favorite, clipList);	
+		}else {
+			setFavorite($scope.playingClipIndex);
+		}		
 	};
 
 	function setFavorite(index) {
@@ -85,23 +85,23 @@ angular.module('app.controllers', [])
 		setFavorite(index);
 	};
 	
-	/*
-	$scope.updateFavoriteFromNative = function() {
-		if($scope.playingClipIndex !== "") {
-			setFavorite($scope.playingClipIndex);
-		}
-	};*/
-
 	$scope.updateThumbFromNative = function() {		
-		if($scope.playingClipIndex !== "") {
-			DBService.updateThumb($scope.clips[$scope.playingClipIndex]._id, null);			
+		if($scope.clips[$scope.playingClipIndex].thumb === "") {
+			DBService.updateThumb($scope.clips[$scope.playingClipIndex]._id, null);	
 		}
 	};
 
 	function setFavorite(index) {
 		DBService.updateFavorite($scope.clips[index]._id, $scope.clips[index].local, false);		
 	}
+	
 	/*
+	$scope.updateFavoriteFromNative = function() {
+		if($scope.playingClipIndex !== "") {
+			setFavorite($scope.playingClipIndex);
+		}
+	};
+
 	function groupClips(clips) {		
 		var i = clips.length, returnObj = {};		
 		while(i--) {

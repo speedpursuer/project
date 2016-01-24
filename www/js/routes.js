@@ -2,7 +2,7 @@ angular.module('app.routes', [])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/tab/player');
+  $urlRouterProvider.otherwise('/tab/stars');
 
   $stateProvider
 
@@ -24,17 +24,17 @@ angular.module('app.routes', [])
       },
     })
         
-    .state('tabsController.player', {
-      url: '/player',
+    .state('tabsController.stars', {
+      url: '/stars',
       resolve: {
-        players: function($stateParams, DBService, init) {
+        stars: function($stateParams, DBService, init) {
           return DBService.getStars();
         }
       },
       views: {
         'tab1': {
-          templateUrl: 'templates/player.html',
-          controller: 'PlayerCtrl'
+          templateUrl: 'templates/stars.html',
+          controller: 'StarsCtrl'
         }
       }
     })
